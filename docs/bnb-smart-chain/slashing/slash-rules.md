@@ -43,9 +43,9 @@ If the evidence is valid:
 
 There is an internal smart contract that records the missed blocking metrics of each validator.
 
-If a validator misses over 200 blocks(governable) in 24 hours, they will not receive the block reward; instead, it will be shared among other validators.
+If a validator misses over 333 blocks(governable) in 24 hours, they will not receive the block reward; instead, it will be shared among other validators.
 
-If a validator misses more than 600 blocks(governable) in 24 hours:
+If a validator misses more than 1000 blocks(governable) in 24 hours:
 
 1. **10BNB**(governable) would be slashed from the  **self-delegated** BNB of the validator
 2. The slashed BNB will be allocated to the credit addresses of validators participating in the next distribution
