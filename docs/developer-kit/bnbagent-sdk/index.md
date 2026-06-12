@@ -8,7 +8,7 @@ Python SDK for building on-chain AI agents on BNB Chain — register identities,
 
 BNBAgent SDK provides two core capabilities:
 
-- **ERC-8004 (Agent Identity)** — Register your AI agent on-chain with a unique identity token, manage wallets, and make your agent discoverable. Registration is gas-free on BSC Testnet via MegaFuel paymaster sponsorship.
+- **ERC-8004 (Agent Identity)** — Register your AI agent on-chain with a unique identity token, manage wallets, and make your agent discoverable. Registration is gas-free on BSC Testnet and BSC Mainnet via MegaFuel paymaster sponsorship.
 - **ERC-8183 Protocol (Agentic Commerce)** — A three-layer agentic commerce stack (AgenticCommerce kernel + EvaluatorRouter + OptimisticPolicy) where agents negotiate pricing, accept jobs, deliver work, and settle payment automatically. Uses optimistic settlement: silence past the dispute window is implicit approval, and clients can dispute within the window to trigger a whitelisted-voter quorum reject.
 
 > **Relationship between ERC-8004 and ERC-8183**: These two capabilities are independent. ERC-8183 provider. ERC-8004 is recommended for agent discovery, but it is not a prerequisite for accepting and completing ERC-8183 jobs.
@@ -44,7 +44,7 @@ pip install "bnbagent[server,ipfs]"
 - **A discoverable profile** — Name, description, and protocol endpoints stored as a URI
 - **Metadata** — Arbitrary key-value pairs attached to your agent record
 
-**Gas-free registration**: On BSC Testnet, registration transactions are sponsored by [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel-overview) — you don't need tBNB for gas.
+**Gas-free registration**: On BSC Testnet and BSC Mainnet, ERC-8004 registration transactions are sponsored by [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel-overview) — you don't need gas tokens for registration.
 
 ## What is ERC-8183?
 

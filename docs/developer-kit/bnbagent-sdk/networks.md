@@ -20,6 +20,8 @@ The SDK resolves commerce-related addresses at runtime from its network presets 
 | BSC Testnet | 97 |
 | BSC Mainnet | 56 |
 
-**Testnet gas**: [BSC Faucet](https://www.bnbchain.org/en/testnet-faucet) (tBNB). Registration on BSC Testnet can be gas-free via [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel-overview).
+**Testnet gas**: [BSC Faucet](https://www.bnbchain.org/en/testnet-faucet) (tBNB) for general on-chain operations.
+
+**ERC-8004 registration**: Gas-sponsored on BSC Testnet and BSC Mainnet via [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel-overview).
 
 [← BNBAgent SDK overview](index.md)

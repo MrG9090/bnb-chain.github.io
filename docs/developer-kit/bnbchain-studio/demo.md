@@ -79,7 +79,7 @@ On-chain steps use the [APEX / ERC-8183 contracts](https://github.com/bnb-chain/
 
 ## 9. Register with ERC-8004
 
-Register the Service's public URL so buyers can discover your agent (`bag erc8004 register`). After deploy, re-register with your production Service URL. Registration on BSC testnet can be gas-sponsored via [MegaFuel](https://docs.nodereal.io/docs/megafuel-overview).
+Register the Service's public URL so buyers can discover your agent (`bag erc8004 register`). After deploy, re-register with your production Service URL. ERC-8004 registration on BSC Testnet and BSC Mainnet can be gas-sponsored via [MegaFuel](https://docs.nodereal.io/docs/megafuel-overview).
 
 ![](../../assets/developer-kit/bnbchain-studio/demo/erc8004-register.png){:style="width:800px"}
 
