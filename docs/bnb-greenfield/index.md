@@ -46,7 +46,7 @@ title: BNB Greenfield
     </a>
     <a href="../developer-kit/">
         <div>Developer Kit</div>
-        <p>Official tool index — repo, DeepWiki, and demo cards for Greenfield, BSC, and opBNB</p>
+        <p>Official tool index — SDK guides, MCP, and demo cards for Greenfield, BSC, and opBNB</p>
     </a>
 </div>
 

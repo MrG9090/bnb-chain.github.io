@@ -282,11 +282,29 @@ nav:
           - Feature Lists: ./bnb-greenfield/roadmap/features.md
   - Developer Kit:
       - Overview: ./developer-kit/index.md
-      - Greenfield SDK: ./developer-kit/greenfield-sdk/index.md
-      - BNBAgent SDK: ./developer-kit/bnbagent-sdk/index.md
-      - MPP SDK: ./developer-kit/mpp-sdk/index.md
-      - MCP: ./developer-kit/mcp/index.md
-      - Ask AI: ./developer-kit/ask-ai/index.md
+      - BNBAgent SDK:
+          - Overview: ./developer-kit/bnbagent-sdk/index.md
+          - Quickstart: ./developer-kit/bnbagent-sdk/quickstart.md
+          - Configuration: ./developer-kit/bnbagent-sdk/configuration.md
+          - Architecture: ./developer-kit/bnbagent-sdk/architecture.md
+          - Networks & Contracts: ./developer-kit/bnbagent-sdk/networks.md
+          - Examples: ./developer-kit/bnbagent-sdk/examples.md
+          - Security: ./developer-kit/bnbagent-sdk/security.md
+          - Troubleshooting: ./developer-kit/bnbagent-sdk/troubleshooting.md
+      - Greenfield SDK:
+          - Overview: ./developer-kit/greenfield-sdk/index.md
+      - MCP & Ask AI:
+          - Overview: ./developer-kit/mcp/index.md
+          - Ask AI: ./developer-kit/ask-ai/index.md
+          - VS Code guide: ./developer-kit/ask-ai/vs-code-guide.md
+      - MPP SDK:
+          - Overview: ./developer-kit/mpp-sdk/index.md
+          - Quickstart: ./developer-kit/mpp-sdk/quickstart.md
+          - Architecture: ./developer-kit/mpp-sdk/architecture.md
+          - Spec Compliance: ./developer-kit/mpp-sdk/spec-compliance.md
+          - Replay Store: ./developer-kit/mpp-sdk/replay-store.md
+          - Examples: ./developer-kit/mpp-sdk/examples.md
+          - ADR permit2Spender: ./developer-kit/mpp-sdk/adr/0001-permit2-spender.md
   - BNB Chain Fusion:
       - BNB Chain Fusion: ./bc-fusion/index.md
       - Overview: ./bc-fusion/overview.md
@@ -586,11 +604,11 @@ plugins:
         'showcase/mcp/index.md': 'developer-kit/mcp/index.md'
         'showcase/mcp/skills.md': 'developer-kit/mcp/skills.md'
         'showcase/mcp/ask-ai-to-ide.md': 'developer-kit/ask-ai/index.md'
-        'showcase/mcp/ask-ai-vs-code-guide.md': 'developer-kit/ask-ai/index.md'
+        'showcase/mcp/ask-ai-vs-code-guide.md': 'developer-kit/ask-ai/vs-code-guide.md'
         'build-guides/ai-agent/mcp/index.md': 'developer-kit/mcp/index.md'
         'build-guides/ai-agent/mcp/skills.md': 'developer-kit/mcp/skills.md'
         'build-guides/ai-agent/ask-ai-to-ide.md': 'developer-kit/ask-ai/index.md'
-        'build-guides/ai-agent/ask-ai-vs-code-guide.md': 'developer-kit/ask-ai/index.md'
+        'build-guides/ai-agent/ask-ai-vs-code-guide.md': 'developer-kit/ask-ai/vs-code-guide.md'
         'greenfield-docs/docs/tutorials/app/ai/hugging-face-intro.md': 'bnb-greenfield/for-developers/tutorials/app/overview.md'
         'greenfield-docs/docs/tutorials/app/data-marketplace/contract-list.md': 'bnb-greenfield/for-developers/cross-chain-integration/contract-list.md'
         'greenfield-docs/docs/tutorials/app/data-marketplace/overview.md': 'bnb-greenfield/for-developers/tutorials/app/overview.md'

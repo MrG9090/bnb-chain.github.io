@@ -210,12 +210,26 @@
 
 ## Developer Kit
 
-- [Overview](https://docs.bnbchain.org/developer-kit/): Lightweight index of official tools; docs on DeepWiki.
+- [Overview](https://docs.bnbchain.org/developer-kit/): Lightweight index of official BNB Chain developer tools.
 - [Greenfield SDK](https://docs.bnbchain.org/developer-kit/greenfield-sdk/): Go and JavaScript client libraries for Greenfield (language tabs).
-- [BNBAgent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/): AI Agent framework for BSC and opBNB (coming soon).
-- [MPP SDK](https://docs.bnbchain.org/developer-kit/mpp-sdk/): Machine Payments Protocol SDK (coming soon).
-- [MCP](https://docs.bnbchain.org/developer-kit/mcp/): bnbchain-mcp Model Context Protocol server.
-- [Ask AI](https://docs.bnbchain.org/developer-kit/ask-ai/): Read-only MCP doc search for BNB Chain.
+- [BNBAgent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/): Python SDK for on-chain AI agents (ERC-8004, ERC-8183) on BSC.
+  - [Quickstart](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/quickstart/): Register agents, run server, use client.
+  - [Architecture](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/architecture/): Module system and data flows.
+  - [Configuration](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/configuration/): Environment variables.
+  - [Networks & contracts](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/networks/): BSC Testnet and Mainnet addresses.
+  - [Examples](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/examples/): Client, voter, and agent-server flows.
+  - [Security](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/security/): Wallet handling and signing policy.
+  - [Troubleshooting](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/troubleshooting/): Common errors and fixes.
+- [MPP SDK](https://docs.bnbchain.org/developer-kit/mpp-sdk/): EVM Charge implementation of Machine Payments Protocol on BSC and opBNB.
+  - [Quickstart](https://docs.bnbchain.org/developer-kit/mpp-sdk/quickstart/): Server + client payment flow.
+  - [Architecture](https://docs.bnbchain.org/developer-kit/mpp-sdk/architecture/): Wire schema and verifiers.
+  - [Spec compliance](https://docs.bnbchain.org/developer-kit/mpp-sdk/spec-compliance/): draft-evm-charge-00 mapping and extensions.
+  - [Replay store](https://docs.bnbchain.org/developer-kit/mpp-sdk/replay-store/): Durable atomic replay protection.
+  - [Examples](https://docs.bnbchain.org/developer-kit/mpp-sdk/examples/): charge-server, charge-demo, bnb-wire-demo.
+- **MCP & Ask AI**
+  - [Overview](https://docs.bnbchain.org/developer-kit/mcp/): bnbchain-mcp server for on-chain tools and IDE integration.
+  - [Ask AI](https://docs.bnbchain.org/developer-kit/ask-ai/): Read-only MCP doc search for BNB Chain.
+  - [VS Code guide](https://docs.bnbchain.org/developer-kit/ask-ai/vs-code-guide/): Step-by-step Ask AI setup in Visual Studio Code.
 
 ## BNB Chain Fusion
 
