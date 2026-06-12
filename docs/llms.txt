@@ -216,14 +216,22 @@
   - [Quickstart](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/quickstart/): Register agents, run server, use client.
   - [Architecture](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/architecture/): Module system and data flows.
   - [Configuration](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/configuration/): Environment variables.
-  - [Networks & contracts](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/networks/): BSC Testnet and Mainnet addresses.
+  - [Networks & contracts](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/networks/): Supported networks and upstream deployment references.
   - [Examples](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/examples/): Client, voter, and agent-server flows.
   - [Security](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/security/): Wallet handling and signing policy.
   - [Troubleshooting](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/troubleshooting/): Common errors and fixes.
+- [BNBChain Studio](https://docs.bnbchain.org/developer-kit/bnbchain-studio/): Scaffold and deploy two-layer blockchain seller agents (CLI `bag`, ERC-8004/8183, x402) on BSC.
+  - [Quickstart](https://docs.bnbchain.org/developer-kit/bnbchain-studio/quickstart/): Install, scaffold, run locally, deploy.
+  - [Demo](https://docs.bnbchain.org/developer-kit/bnbchain-studio/demo/): End-to-end weather-forecast seller walkthrough.
+  - [Architecture](https://docs.bnbchain.org/developer-kit/bnbchain-studio/architecture/): Six-layer stack and two-layer deploy model.
+  - [Configuration](https://docs.bnbchain.org/developer-kit/bnbchain-studio/configuration/): studio.toml, .env.local, cross-layer sync.
+  - [CLI reference](https://docs.bnbchain.org/developer-kit/bnbchain-studio/cli-reference/): bag command groups and MCP tools.
+  - [Deployment](https://docs.bnbchain.org/developer-kit/bnbchain-studio/deployment/): AgentCore + EC2 two-artifact deploy path.
+  - [Security](https://docs.bnbchain.org/developer-kit/bnbchain-studio/security/): Keystore posture, signing policy, MCP read-only.
+  - [Troubleshooting](https://docs.bnbchain.org/developer-kit/bnbchain-studio/troubleshooting/): bag doctor and common errors.
 - [MPP SDK](https://docs.bnbchain.org/developer-kit/mpp-sdk/): EVM Charge implementation of Machine Payments Protocol on BSC and opBNB.
   - [Quickstart](https://docs.bnbchain.org/developer-kit/mpp-sdk/quickstart/): Server + client payment flow.
   - [Architecture](https://docs.bnbchain.org/developer-kit/mpp-sdk/architecture/): Wire schema and verifiers.
-  - [Spec compliance](https://docs.bnbchain.org/developer-kit/mpp-sdk/spec-compliance/): draft-evm-charge-00 mapping and extensions.
   - [Replay store](https://docs.bnbchain.org/developer-kit/mpp-sdk/replay-store/): Durable atomic replay protection.
   - [Examples](https://docs.bnbchain.org/developer-kit/mpp-sdk/examples/): charge-server, charge-demo, bnb-wire-demo.
 - **MCP & Ask AI**

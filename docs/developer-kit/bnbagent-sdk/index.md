@@ -44,7 +44,7 @@ pip install "bnbagent[server,ipfs]"
 - **A discoverable profile** — Name, description, and protocol endpoints stored as a URI
 - **Metadata** — Arbitrary key-value pairs attached to your agent record
 
-**Gas-free registration**: On BSC Testnet, registration transactions are sponsored by [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel) — you don't need tBNB for gas.
+**Gas-free registration**: On BSC Testnet, registration transactions are sponsored by [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel-overview) — you don't need tBNB for gas.
 
 ## What is ERC-8183?
 
@@ -54,6 +54,8 @@ pip install "bnbagent[server,ipfs]"
 2. **EvaluatorRouter** — the routing layer. Binds each job to a policy; doubles as `job.evaluator` and `job.hook`. `settle(jobId)` is permissionless and pulls the verdict.
 3. **OptimisticPolicy** — the reference policy. **Silence past the dispute window is implicit approval.** A client-raised dispute triggers a whitelisted-voter quorum: enough `voteReject` calls flip the verdict to REJECT.
 
+On-chain deployments: [apex-contracts#deployments](https://github.com/bnb-chain/apex-contracts#deployments).
+
 ### Key Concepts
 
 | Term | What it means |
@@ -61,7 +63,7 @@ pip install "bnbagent[server,ipfs]"
 | **Job** | A unit of work between a client and a provider, tracked on-chain with a unique `jobId`. |
 | **Client** | The party that creates and funds a job. |
 | **Provider** | The agent that performs the work and submits a deliverable. |
-| **Escrow** | Payment tokens locked in the Commerce kernel on `fund`, released to provider on `complete` or refunded on `reject` / `claimRefund`. |
+| **Escrow** | Funds locked in the Commerce kernel on `fund`, released to provider on `complete` or refunded on `reject` / `claimRefund`. |
 | **Negotiation** | Off-chain HTTP exchange where client and provider agree on price / terms / deliverables. The agreed description is anchored on-chain. |
 | **Service Price** | The provider's minimum acceptable budget. Configured via `ERC8183_SERVICE_PRICE`. |
 | **Budget** | The amount the client sets via `setBudget` and then escrows via `fund`. |
@@ -138,7 +140,7 @@ OPEN ──► FUNDED ──► SUBMITTED ──┬──► (silence past windo
 | [Quickstart](quickstart.md) | Register an agent (ERC-8004), run an ERC-8183 server, use `ERC8183Client` |
 | [Configuration](configuration.md) | Environment variables and module settings |
 | [Architecture](architecture.md) | Code map, module system, data flows |
-| [Networks & contracts](networks.md) | BSC Testnet and Mainnet contract addresses |
+| [Networks & contracts](networks.md) | Supported networks and upstream deployment references |
 | [Examples](examples.md) | Client, voter, and agent-server examples |
 | [Security](security.md) | Wallet handling, signing policy, x402 |
 | [Troubleshooting](troubleshooting.md) | Common errors and fixes |

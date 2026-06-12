@@ -29,7 +29,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
     ## Install
 
 
-    The Greenfield SDK for Go requires [Go 1.20 or later](https://go.dev/).You can view your current version of Go by running the go version command. For information about installing or upgrading your version of Go, see [https://golang.org/doc/install](https://golang.org/doc/install).
+    The Greenfield SDK for Go requires [Go 1.20 or later](https://go.dev/). You can view your current version of Go by running the go version command. For information about installing or upgrading your version of Go, see [https://golang.org/doc/install](https://golang.org/doc/install).
 
     To install the SDK and its dependencies, run the following Go command.
 
@@ -231,7 +231,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
     	}
     ```
 
-    Apart from the basic data queries shown above, there are many more features. Please see the[JSON-RPC API Reference](../../../bnb-greenfield/for-developers/network-endpoint/endpoints.md)for all Greenfield API definitions.
+    Apart from the basic data queries shown above, there are many more features. Please see the [JSON-RPC API Reference](../../bnb-greenfield/for-developers/network-endpoint/endpoints.md) for all Greenfield API definitions.
 
 
     ### Transactions
@@ -286,7 +286,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
     This will output something like:
 
     ```shell
-    raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/cosmos.bank.v1beta1.MsgSend"},{"key":"sender","value":"0x525482AB3922230e4D73079890dC905dCc3D37cd"},{"key":"module","value":"bank"}]},{"type":"coin_spent","attributes":[{"key":"spender","value":"0x525482AB3922230e4D73079890dC905dCc3D37cd"},{"key":"amount","value":"1BNB"}]},{"type":"coin_received","attributes":[{"key":"receiver","value":"0x78C3A3d10B1032bB2810366361dCE84E2e92eFCB"},{"key":"amount","value":"1BNB"}]},{"type":"transfer","attributes":[{"key":"recipient","value":"0x78C3A3d10B1032bB2810366361dCE84E2e92eFCB"},{"key":"sender","value":"0x525482AB3922230e4D73079890dC905dCc3D37cd"},{"key":"amount","value":"1BNB"}]},{"type":"message","attributes":[{"key":"sender","value":"0x525482AB3922230e4D73079890dC905dCc3D37cd"}]}]}]'
+    raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/cosmos.bank.v1beta1.MsgSend"},{"key":"sender","value":"<sender-address>"},{"key":"module","value":"bank"}]},{"type":"coin_spent","attributes":[{"key":"spender","value":"<sender-address>"},{"key":"amount","value":"1BNB"}]},{"type":"coin_received","attributes":[{"key":"receiver","value":"<receiver-address>"},{"key":"amount","value":"1BNB"}]},{"type":"transfer","attributes":[{"key":"recipient","value":"<receiver-address>"},{"key":"sender","value":"<sender-address>"},{"key":"amount","value":"1BNB"}]},{"type":"message","attributes":[{"key":"sender","value":"<sender-address>"}]}]}]'
     timestamp: "2023-06-22T20:02:19Z"
     tx:
       '@type': /cosmos.tx.v1beta1.Tx
@@ -315,8 +315,8 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
           amount:
           - amount: "1"
             denom: BNB
-          from_address: 0x525482AB3922230e4D73079890dC905dCc3D37cd
-          to_address: 0x78C3A3d10B1032bB2810366361dCE84E2e92eFCB
+          from_address: <sender-address>
+          to_address: <receiver-address>
         non_critical_extension_options: []
         timeout_height: "0"
       signatures:
@@ -386,7 +386,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
     	opts := types.CreateBucketOptions{Visibility: visibility, ChargedQuota: chargedQuota}
     ```
 
-    To understand how does `quota` work, read [this](../../../bnb-greenfield/core-concept/billing-payment.md#storage-service-fee).
+    To understand how does `quota` work, read [this](../../bnb-greenfield/core-concept/billing-payment.md#storage-service-fee).
 
 
 
@@ -495,10 +495,10 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
     * [Storage Module on Greenfield](https://github.com/bnb-chain/greenfield/blob/master/docs/modules/storage-module.md): The storage module on Greenfield Chain.
     * [Storage Provider on Greenfield](https://github.com/bnb-chain/greenfield/blob/master/docs/modules/storage-provider.md): The storage provider on Greenfield Chain.
     * [Data Availability Challenge](https://github.com/bnb-chain/greenfield/blob/master/docs/modules/data-availability-challenge.md): The correctness of payload be stored in SP.
-    * [Storage Provider Introduction](../../../bnb-greenfield/storage-provider/overview.md): The Greenfield Storage Provider documents.
-    * [Storage Provider Compiling and Dependencies](../../../bnb-greenfield/storage-provider/run-book/compile-dependences.md): The detailed introduction to sp compiling and dependencies.
-    * [Run Local Storage Provider Network](../../../bnb-greenfield/storage-provider/run-book/run-local-SP-network.md): The introduction to run local SP env for testing.
-    * [Join SP Network](../../../bnb-greenfield/storage-provider/run-book/join-SP-network.md): The introduction to join SP network in testnet or mainnet
+    * [Storage Provider Introduction](../../bnb-greenfield/storage-provider/overview.md): The Greenfield Storage Provider documents.
+    * [Storage Provider Compiling and Dependencies](../../bnb-greenfield/storage-provider/run-book/compile-dependences.md): The detailed introduction to sp compiling and dependencies.
+    * [Run Local Storage Provider Network](../../bnb-greenfield/storage-provider/run-book/run-local-SP-network.md): The introduction to run local SP env for testing.
+    * [Join SP Network](../../bnb-greenfield/storage-provider/run-book/join-SP-network.md): The introduction to join SP network in testnet or mainnet
 
 === "JavaScript"
 
@@ -615,7 +615,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
     ```js
     const broadcastRes = await broadcast({
       //...
-      privateKey: '0x.......'
+      privateKey: '<hex-private-key>'
     });
     ```
 
@@ -802,7 +802,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
 
     ```json
     {
-       "address":"0x525482AB3922230e4D73079890dC905dCc3D37cd",
+       "address":"<sender-address>",
        "pubKey":{
           "typeUrl":"/cosmos.crypto.eth.ethsecp256k1.PubKey",
           "value":"CiECKuOEfCNFxnfiinnIIoe0OSf3VEOAU5jxwmZscfpOaW4="
@@ -862,7 +862,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
       },
       {
         type: 'ECDSA',
-        privateKey: '0x....'
+        privateKey: '<hex-private-key>'
       },
     );
     ```
@@ -909,11 +909,11 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
 
     ### Prepare
 
-    To begin, create an account and deposit tokens into it on Greenfield. Follow the instructions provided in [Token Transfer](../../../bnb-greenfield/getting-started/token-transfer.md). Please be aware that if your account does not have any BNB, the transaction will not be executed.
+    To begin, create an account and deposit tokens into it on Greenfield. Follow the instructions provided in [Token Transfer](../../bnb-greenfield/getting-started/token-transfer.md). Please be aware that if your account does not have any BNB, the transaction will not be executed.
 
     #### Choose Storage Provider
 
-    Storing data is one of the most important features of Greenfield. All storage-related apis require the [storage provider](../../../bnb-greenfield/storage-provider/overview.md) to be chose.
+    Storing data is one of the most important features of Greenfield. All storage-related apis require the [storage provider](../../bnb-greenfield/storage-provider/overview.md) to be chose.
 
     ```js title="select sp"
     const spList = await client.sp.getStorageProviders();
@@ -946,7 +946,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
            expirationMs: 5 * 24 * 60 * 60 * 1000,
            domain: window.location.origin,
            // your wallet account
-           address: '0x..',
+           address: '<wallet-address>',
         }, provider);
         ```
 
@@ -957,10 +957,10 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
         
         ```js title="Nodejs"
         // your account
-        const ACCOUNT_ADDRESS = '0x....'
+        const ACCOUNT_ADDRESS = '<wallet-address>'
         
         // your account's private key
-        const ACCOUNT_PRIVATEKEY = '0x....'
+        const ACCOUNT_PRIVATEKEY = '<hex-private-key>'
         ```
 
     ### 1. Create Bucket
@@ -1064,7 +1064,7 @@ Client libraries for [BNB Greenfield](https://greenfield.bnbchain.org/) decentra
         bucketName: 'bucket_name',
         objectName: 'object_name',
         // user's account address
-        creator: '0x...',
+        creator: '<wallet-address>',
         visibility: VisibilityType.VISIBILITY_TYPE_PRIVATE,
         contentType: 'json',
         redundancyType: RedundancyType.REDUNDANCY_EC_TYPE,

@@ -103,7 +103,7 @@ High-level facade over three contracts. Most callers only touch `ERC8183Client`.
 | `commerce.py` | `CommerceClient` — low-level wrapper for `AgenticCommerceUpgradeable` |
 | `router.py` | `RouterClient` — low-level wrapper for `EvaluatorRouterUpgradeable` |
 | `policy.py` | `PolicyClient` — low-level wrapper for `OptimisticPolicy` (dispute / voteReject / check / voter admin) |
-| `../erc20/client.py` | `MinimalERC20Client` — used by `ERC8183Client` for the payment token (decimals/symbol/balanceOf/allowance/approve) |
+| `../erc20/client.py` | `MinimalERC20Client` — used by `ERC8183Client` for ERC-20 reads (decimals/symbol/balanceOf/allowance/approve) |
 | `types.py` | `JobStatus`, `Verdict`, `REASON_APPROVED`, `REASON_REJECTED`, `Job` dataclass |
 | `config.py` | `ERC8183Config` — unified config (wallet_provider + storage + contract overrides) |
 | `negotiation.py` | `NegotiationHandler`, structured description schema, quote expiry |
@@ -207,7 +207,7 @@ resolve_network(name) + env var overrides
 BNBAgentConfig
   ├── wallet_provider  (explicit or auto-wrapped from private_key)
   ├── settings         (general key-value)
-  └── modules          (namespaced: {"erc8183": {"commerce_address": "0x..."}})
+  └── modules          (namespaced: {"erc8183": {"commerce_address": "<override>"}})
 ```
 
 **Environment variable overrides** (module-scoped):
@@ -227,8 +227,8 @@ surface self-contained and obvious from the prefix.
 When `network=NetworkConfig(...)` is passed directly (instead of a preset
 name), env overrides are **not** applied — the object is used as-is.
 
-Payment token address is NOT configurable — it is immutable on the Commerce
-kernel and fetched at runtime via `ERC8183Client.payment_token`.
+Commerce settlement assets are resolved at runtime from the deployed kernel
+via `ERC8183Client` — not duplicated in this documentation.
 
 Both `BNBAgentConfig` and `ERC8183Config` support the convenience pattern:
 pass `private_key` + `wallet_password` and the config auto-wraps them into
@@ -252,9 +252,8 @@ These properties hold across the codebase and should be preserved:
   ensures one manager per address to prevent collisions in concurrent code.
 - **Retry with backoff on rate limits (429) and nonce conflicts.** Up to 5
   retries with exponential backoff. Nonce errors trigger chain re-sync.
-- **Payment token is dynamically fetched.** It is never part of `NetworkConfig`
-  or `ERC8183Config` because it is an immutable property of the deployed
-  Commerce kernel.
+- **Settlement assets are dynamically fetched.** They are never part of
+  `NetworkConfig` or `ERC8183Config` — see [Networks & contracts](networks.md).
 
 ## Data Flows
 

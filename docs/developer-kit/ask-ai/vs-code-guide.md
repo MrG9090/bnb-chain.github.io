@@ -11,7 +11,7 @@ Step‑by‑step walkthrough to query BNB Chain documentation from within VS Cod
 1. Open the **Extensions** view.
 2. Search for **“MCP Client”** and hit **Install**.
 
-![VS Code Extensions view with MCP Client selected](/docs/showcase/img/1-open-settings-json.png)
+![VS Code Extensions view with MCP Client selected](../../showcase/img/1-open-settings-json.png)
 
 The extension adds MCP support to VS Code, letting you connect to external knowledge bases such as **BNB Chain Ask AI**.
 
@@ -33,7 +33,7 @@ The extension adds MCP support to VS Code, letting you connect to external knowl
 }
 ```
 
-![Settings JSON with the Ask AI block added](/docs/showcase/img/2-add-mcp-config.png)
+![Settings JSON with the Ask AI block added](../../showcase/img/2-add-mcp-config.png)
 
 3. Save the file. The MCP client should automatically reload; if not, restart the VS Code window.
 
@@ -43,11 +43,11 @@ The extension adds MCP support to VS Code, letting you connect to external knowl
 
 Hover the new server block and click **▶ Start**.
 
-![Start badge before connection](/docs/showcase/img/3-start-mcp.png)
+![Start badge before connection](../../showcase/img/3-start-mcp.png)
 
 When the badge flips to **✓ Running**, VS Code is now connected to **BNB Chain Ask AI**.
 
-![Server block indicating ✓ Running](/docs/showcase/img/4-started-mcp.png)
+![Server block indicating ✓ Running](../../showcase/img/4-started-mcp.png)
 
 ---
 
@@ -55,7 +55,7 @@ When the badge flips to **✓ Running**, VS Code is now connected to **BNB Chain
 
 From the menu bar choose **View → Chat** or press <kbd>Ctrl + Alt + I</kbd>. A chat window docks to the side of the editor.
 
-![Opening the Chat view from the View menu](/docs/showcase/img/5-launch-chat.png)
+![Opening the Chat view from the View menu](../../showcase/img/5-launch-chat.png)
 
 ---
 
@@ -68,7 +68,7 @@ At the bottom of the chat input you’ll find two dropdowns:
 
 Set **Mode** to **Agent**, then pick **bnbchain‑askai‑mcp** from the Provider list.
 
-![Dropdown showing Agent selected and bnbchain-askai-mcp highlighted](/docs/showcase/img/6-select-agent.png)
+![Dropdown showing Agent selected and bnbchain-askai-mcp highlighted](../../showcase/img/6-select-agent.png)
 
 ---
 
@@ -80,15 +80,15 @@ Set **Mode** to **Agent**, then pick **bnbchain‑askai‑mcp** from the Provide
    What is BNB Greenfield?
    ```
 
-   ![Chat input with sample question typed](/docs/showcase/img/7-query-chat.png)
+   ![Chat input with sample question typed](../../showcase/img/7-query-chat.png)
 
 2. Press <kbd>Enter</kbd>. VS Code presents a confirmation card recommending the **bnbchain‑askai‑mcp** tool.
 
-   ![Confirmation card asking to continue with the recommended MCP](/docs/showcase/img/8-prompt-for-mcp.png)
+   ![Confirmation card asking to continue with the recommended MCP](../../showcase/img/8-prompt-for-mcp.png)
 
 3. Click **Continue** (or just press <kbd>Enter</kbd> again). Ask AI streams back a concise answer plus source links you can click to jump to the original docs.
 
-   ![Answer streamed in the chat panel](/docs/showcase/img/9-mcp-response.png)
+   ![Answer streamed in the chat panel](../../showcase/img/9-mcp-response.png)
 
 ---
 
@@ -102,7 +102,6 @@ This opens a transient results panel without leaving your current editor tab.
 
 ### Need help?
 
-* Reach out on the BNB Chain Discord.
 * File an issue in the [docs repo](https://github.com/bnb-chain/bnb-chain.github.io/issues).
 
 Happy building! 🎉

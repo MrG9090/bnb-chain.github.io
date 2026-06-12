@@ -4,9 +4,7 @@ title: MPP SDK Architecture
 
 # Architecture
 
-`@bnb-chain/mpp` is the EVM Charge (`draft-evm-charge-00`) implementation
-layered on [`mppx`](https://github.com/wevm/mppx). It exposes three entry
-points sharing one wire contract:
+`@bnb-chain/mpp` exposes three entry points sharing one wire contract:
 
 - `@bnb-chain/mpp` — top-level barrel (`chargeFromDecimal`, the receipt
   codec, the `chargeMethod` instance)
@@ -32,7 +30,7 @@ import it, so a wire-schema change is impossible to make on one side only.
         │  defaults (incl. permit2Spender), request hook,       │
         │  stableBinding, verify router                         │
         ▼                                                        │
-   Mppx.create({ methods:[...] }) → HTTP handler                │
+   charge handler → HTTP route                                 │
         │                                                       │
         ▼                                                        │
    GET /resource (no credential)                                │
@@ -49,7 +47,7 @@ import it, so a wire-schema change is impossible to make on one side only.
         └──────────────▶ verify router (by payload.type)        │
                                        │                         │
         ┌─────────── verifier (per credential type) ────────────┐
-        │  challenge binding check (mppx-managed/hmac/lookup)   │
+        │  challenge binding check (managed/hmac/lookup)      │
         │  accepted-types gate → local checks → replay reserve  │
         │  → on-chain settle (permit2/auth) or correlate (hash) │
         │  → markConsumed → buildEvmReceipt                     │
@@ -84,7 +82,7 @@ lookups up front:
 - settlement signer (`src/server/Settlement.ts`) — required iff
   `permit2` or `authorization` is in the resolved set
 - EIP-712 domain (`name` / `version`) for `authorization` from the
-  curated matrix
+  curated presets (see upstream `curated.ts`)
 - replay store (presence-only check; durable backend is a deployment
   claim — see [replay-store.md](replay-store.md))
 
@@ -95,10 +93,9 @@ lookups up front:
   is configured
 - **request hook** — route-override guard (§14.10): rejects any route
   option that tries to change a server-pinned field, and rejects partial
-  `methodDetails` (mppx merges shallowly, so a partial would silently drop
-  fields)
-- **stableBinding** — augments mppx's default HMAC binding to cover the
-  full `methodDetails` (mppx only pins `chainId` + `splits`)
+  `methodDetails` (shallow merge — a partial would silently drop fields)
+- **stableBinding** — augments the default HMAC binding to cover the full
+  `methodDetails` (not just `chainId` + `splits`)
 - **verify** — challenge-binding check, then the accepted-types gate,
   then dispatch by `credential.payload.type` to the matching verifier
 
@@ -117,7 +114,7 @@ transitions and the terminal-commit phase that prevents double-spend.
 - **permit2** — recover the EIP-712 signer, `permitWitnessTransferFrom`
   (single) / `permitBatchWitnessTransferFrom` (batch), assert all
   `Transfer` logs. The EIP-712 `spender` MUST equal the settlement signer
-  — see [spec-compliance.md](spec-compliance.md) §`permit2Spender`.
+  (published in `methodDetails.permit2Spender` on the challenge).
 - **authorization** — recover the EIP-3009 signer against the curated
   token domain, `transferWithAuthorization`, assert the `Transfer` log
 
@@ -134,23 +131,22 @@ complete `Payment ...` Authorization header value).
 ### Receipt codec — `src/server/Receipt.ts`
 
 `buildEvmReceipt` / `serializeEvmReceipt` / `deserializeEvmReceipt`
-implement the `draft §7.6` receipt (`method` / `challengeId` / `reference`
-/ `status` / `timestamp` / `chainId` / optional `externalId`). The codec
+implement the payment receipt (`method` / `challengeId` / `reference` /
+`status` / `timestamp` / `chainId` / optional `externalId`). The codec
 is browser-safe (no Node `Buffer`) so the demo can round-trip it
-client-side. mppx's default `Receipt.Schema` drops `challengeId` /
-`chainId`, so the SDK ships its own `evmHttpTransport`
+client-side. The SDK ships its own `evmHttpTransport`
 (`src/server/Transport.ts`) that `charge()` auto-wires on the per-method
-transport slot — deployments never configure `Mppx.create({ transport })`.
+transport slot.
 
 ## Challenge binding modes
 
 `challengeBinding.mode` on `ServerParameters` selects how a credential's
 embedded challenge is trusted (`src/server/ChallengeBinding.ts`):
 
-- **mppx-managed** — under `Mppx.create`; mppx runs `Challenge.verify`
-  HMAC + `Expires.assert` automatically. The SDK only adds the
-  method/intent + route-binding guards.
-- **mppx-hmac** — bare `Method.toServer(...).verify`; the SDK runs the
+- **`mppx-managed`** — integrated HTTP handler path; `Challenge.verify`
+  HMAC + `Expires.assert` run automatically. The SDK adds method/intent +
+  route-binding guards.
+- **`mppx-hmac`** — bare `Method.toServer(...).verify`; the SDK runs the
   full `Challenge.verify({ secretKey })` + `Expires.assert` itself.
 - **stored-lookup** — no server secret; the deployment persists each
   issued challenge (`rememberChallenge`) and the verifier constant-time
@@ -159,5 +155,5 @@ embedded challenge is trusted (`src/server/ChallengeBinding.ts`):
 
 ## Source map
 
-See [`AGENTS.md`](https://github.com/bnb-chain/mpp-sdk/blob/main/AGENTS.md) for the file-by-file map and contributor
+See the package source map in the repository for the file-by-file layout and contributor
 workflow rules.

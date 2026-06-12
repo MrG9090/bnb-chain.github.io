@@ -7,9 +7,7 @@ title: MPP SDK Replay Store
 The replay store is the durable, atomic backend that guarantees a given
 credential settles **at most once**. It's independent of
 `challengeBinding`: the same store backs `mppx-managed`, `mppx-hmac`, and
-`stored-lookup`. Spec §9 +
-[`draft-evm-charge-00`](https://paymentauth.org/draft-evm-charge-00.html)
-both require it.
+`stored-lookup`.
 
 Implementation: `src/server/Replay.ts`.
 
@@ -83,7 +81,7 @@ protection matches on-chain replay protection exactly.
 
 ## Production requirements
 
-Spec §9 requires the store to be:
+Production deployments require the store to be:
 
 1. **Durable across processes / pods.** A single Node-process `Map` makes
    replay protection per-pod on a multi-pod deployment — N pods could each
@@ -102,7 +100,7 @@ What the SDK enforces vs. what it can't:
 When a store IS provided under `production`, it's accepted on presence
 alone — the SDK can't structurally tell a Redis client from a `Map`
 wrapper across the FFI boundary. Durability is therefore a
-deployment-side claim: pass a real durable store and own the §9 promise.
+deployment-side claim: pass a real durable store and own the durability promise.
 
 ## Suggested durable backends
 
@@ -113,6 +111,6 @@ deployment-side claim: pass a real durable store and own the §9 promise.
 - **Cloudflare KV / Durable Objects** — `put` with conditional-write
   (KV) or the single-writer model (DO, stronger consistency).
 
-The store implements `ChargeStore` (an `mppx` `Store.AtomicStore`-shaped
-interface). `Store.memory()` from mppx is acceptable **only** for tests
-and local single-process dev.
+The store implements `ChargeStore` (an atomic compare-and-set interface).
+`Store.memory()` is acceptable **only** for tests and local single-process
+dev.

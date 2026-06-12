@@ -17,12 +17,12 @@ title: BNBAgent SDK Security
 
 `EVMWalletProvider.sign_typed_data` is **policy-gated by default**. Without
 explicit configuration, the wallet only accepts EIP-3009
-`TransferWithAuthorization` / `ReceiveWithAuthorization` against the registered
-U-token deployments (BSC mainnet/testnet). All Permit variants
+`TransferWithAuthorization` / `ReceiveWithAuthorization` against the
+network-default EIP-3009 domains on BSC mainnet and testnet. All Permit variants
 (ERC-2612 `Permit`, Permit2 `PermitSingle`/`PermitBatch`) are denylisted —
 even if your own code mistakenly allowlists them, the denylist wins.
 
-The threat: U token (and most ERC-20s) support EIP-2612 `Permit` on-chain.
+The threat: most ERC-20s support EIP-2612 `Permit` on-chain.
 Without `SigningPolicy`, an LLM agent receiving a 402 challenge from a
 malicious server could be talked into signing a Permit that grants unbounded
 allowance, draining the wallet over time. The default policy refuses
@@ -34,16 +34,17 @@ unconditionally; you opt in explicitly when you know what you're signing.
 from bnbagent import EVMWalletProvider, X402Signer
 from bnbagent.networks import get_address, BSC_MAINNET_CHAIN_ID
 
-U = get_address(BSC_MAINNET_CHAIN_ID).payment_token
+network_cfg = get_address(BSC_MAINNET_CHAIN_ID)
+settlement_asset = network_cfg.payment_token  # runtime-resolved — see apex-contracts
 
-# Strict default applied automatically — zero config needed for U-token TWA.
+# Strict default applied automatically — zero config needed for default TWA.
 wallet = EVMWalletProvider(password=os.environ["WALLET_PASSWORD"])
 
 # Pass a scoped signer (not the wallet) to your @tool functions:
 signer = X402Signer(
     wallet,
-    max_value_per_call={U: 1_000_000},   # 1 USDC equivalent
-    session_budget={U: 50_000_000},      # 50 USDC across this session
+    max_value_per_call={settlement_asset: 1_000_000},
+    session_budget={settlement_asset: 50_000_000},
 )
 
 def pay_for_resource(challenge: dict, expected_to: str) -> dict:
@@ -72,7 +73,7 @@ from bnbagent import EVMWalletProvider, SigningPolicy
 from bnbagent.networks import BSC_MAINNET_CHAIN_ID
 
 extended = SigningPolicy.strict_default().extend(
-    domain_allowlist={(BSC_MAINNET_CHAIN_ID, "0xMyCustomVerifyingContract")},
+    domain_allowlist={(BSC_MAINNET_CHAIN_ID, "<verifying-contract>")},
 )
 wallet = EVMWalletProvider(
     password=os.environ["WALLET_PASSWORD"],
@@ -94,15 +95,9 @@ audit-friendly; production / agent-reachable code MUST NOT call them.
 ```python
 wallet = EVMWalletProvider(password=...)
 print(wallet.signing_policy)
-# SigningPolicy(
-#   domain_allowlist (2 entries):
-#     - chain_id=56 verifyingContract=0xcE24439F2D9C6a2289F741120FE202248B666666
-#     - chain_id=97 verifyingContract=0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565
-#   primary_type_allowlist=['ReceiveWithAuthorization', 'TransferWithAuthorization']
-#   primary_type_denylist=['Permit', 'PermitBatch', 'PermitSingle']
-#   validity: window<=600s, future<=900s, required_for=[...]
-#   allow_unknown_domain=False
-# )
+# SigningPolicy with domain_allowlist entries for BSC mainnet + testnet,
+# primary_type_allowlist for EIP-3009 TWA types, and primary_type_denylist
+# for Permit variants.
 ```
 
 `SigningPolicy.to_dict()` / `from_dict()` round-trip the policy through
@@ -115,12 +110,11 @@ manifests) can store and reload configurations declaratively.
 What are you signing?
 │
 ├── EIP-3009 TransferWithAuthorization / ReceiveWithAuthorization
-│   against U-token on BSC mainnet (56) or testnet (97)
+│   against network-default domains on BSC mainnet (56) or testnet (97)
 │   → ✅ zero config — strict_default() already allows it
 │
-├── Same EIP-3009 type but a different token / chain
-│   (e.g. USDC on Ethereum mainnet)
-│   → 🟡 extend domain_allowlist with (chain_id, token_address)
+├── Same EIP-3009 type but a different chain / verifying contract
+│   → 🟡 extend domain_allowlist with (chain_id, verifying_contract)
 │
 ├── A custom typed-data primary type
 │   (e.g. "MyOrder" / "BondQuote" / "Auction")
@@ -144,14 +138,14 @@ What are you signing?
 
 | Scenario | Extension snippet |
 |---|---|
-| Add a custom token on chain 56 | `extend(domain_allowlist={(56, "0xMyToken")})` |
-| Add a custom primary type "MyOrder" on chain 56 / contract X | `extend(domain_allowlist={(56, X)}, primary_type_allowlist={"MyOrder"})` |
-| Allow Ethereum-mainnet USDC | `extend(domain_allowlist={(1, "0xA0b8...eB48")})` |
+| Add a verifying contract on chain 56 | `extend(domain_allowlist={(56, "<verifying-contract>")})` |
+| Add a custom primary type "MyOrder" on chain 56 | `extend(domain_allowlist={(56, "<verifying-contract>")}, primary_type_allowlist={"MyOrder"})` |
+| Allow a verifying contract on another chain | `extend(domain_allowlist={(chain_id, "<verifying-contract>")})` |
 | Opt into Permit2 SignatureTransfer | `extend(primary_type_allowlist={"PermitTransferFrom"})` |
 | Widen validity to 30 min | `extend(max_validity_window_seconds=1800)` |
 
-Examples: see [`examples/security_e2e.py`](https://github.com/bnb-chain/bnbagent-sdk/blob/main/examples/security_e2e.py) (signing + recovery loop, 6 assertions)
-and [`examples/x402_buyer_demo.py`](https://github.com/bnb-chain/bnbagent-sdk/blob/main/examples/x402_buyer_demo.py) (complete buyer flow with mock 402 server).
+Examples: see [examples/security_e2e.py](https://github.com/bnb-chain/bnbagent-sdk/blob/main/examples/security_e2e.py) (signing + recovery loop, 6 assertions)
+and [examples/x402_buyer_demo.py](https://github.com/bnb-chain/bnbagent-sdk/blob/main/examples/x402_buyer_demo.py) (complete buyer flow with mock 402 server).
 
 Full design rationale and threat model: see ADR #30 in the
 [bnbchain-studio](https://github.com/bnb-chain/bnbchain-studio) repo

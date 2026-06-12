@@ -52,7 +52,7 @@ Set up an agent server that accepts jobs, processes work, and gets paid.
 ### Prerequisites
 
 - `pip install "bnbagent[server,ipfs]"`
-- A `.env` file with your credentials (see [`examples/agent-server/.env.example`](https://github.com/bnb-chain/bnbagent-sdk/tree/main/examples/agent-server/.env.example))
+- A `.env` file with your credentials (see [examples/agent-server/.env.example](https://github.com/bnb-chain/bnbagent-sdk/tree/main/examples/agent-server/.env.example))
 
 ### Option 1: Standalone App (`create_erc8183_app`)
 
@@ -71,7 +71,7 @@ app = create_erc8183_app(on_job=execute_job)
 ```bash
 # .env
 WALLET_PASSWORD=your-secure-password
-PRIVATE_KEY=0x...                                # first run only; encrypted to ~/.bnbagent/wallets/
+PRIVATE_KEY=<hex-private-key>                  # first run only; encrypted to ~/.bnbagent/wallets/
 ERC8183_AGENT_URL=http://localhost:8003/erc8183  # required for LocalStorageProvider (default)
 ERC8183_SERVICE_PRICE=1000000000000000000        # 1 token (18 decimals)
 # To use IPFS instead, swap to IPFSStorageProvider in your service code and set:
@@ -121,7 +121,7 @@ Starlette does not propagate lifespan events into mounted sub-apps; call `erc818
 | `GET`  | `/erc8183/job/{id}` | Job details from the Commerce kernel. |
 | `GET`  | `/erc8183/job/{id}/response` | Stored deliverable for a submitted job. |
 | `GET`  | `/erc8183/job/{id}/verify` | Verify a job is `FUNDED`, assigned to this provider, not expired, budget ok. |
-| `GET`  | `/erc8183/status` | Agent wallet, contract addresses, service price, payment token, decimals. |
+| `GET`  | `/erc8183/status` | Agent wallet, service price, decimals, network info. |
 | `GET`  | `/erc8183/health` | Liveness check. |
 
 ### `on_job` Callback
@@ -152,11 +152,10 @@ async def on_job(job: dict) -> tuple[str, dict]: ...
 from bnbagent.erc8183 import ERC8183Client, JobStatus
 from bnbagent.wallets import EVMWalletProvider
 
-wallet = EVMWalletProvider(password="your-password", private_key="0x...")
+wallet = EVMWalletProvider(password="your-password", private_key="<hex-private-key>")
 erc8183 = ERC8183Client(wallet, network="bsc-testnet")
 
-# Token helpers (payment token is fetched dynamically from the kernel).
-print("symbol:", erc8183.token_symbol())
+# Settlement-asset helpers (decimals / balance resolved from network presets).
 print("decimals:", erc8183.token_decimals())
 print("balance:", erc8183.token_balance())
 
@@ -169,7 +168,7 @@ job_id = res["jobId"]
 
 erc8183.register_job(job_id)                    # bind default policy (OptimisticPolicy)
 erc8183.set_budget(job_id, budget)
-erc8183.fund(job_id, budget)                    # floor-based auto-approve (100 U default)
+erc8183.fund(job_id, budget)                    # floor-based auto-approve (default cap from SDK)
 
 # ... provider submits ...
 
@@ -179,7 +178,7 @@ assert erc8183.get_job_status(job_id) == JobStatus.COMPLETED
 
 ### `fund(job_id, amount, approve_floor=None)`
 
-- **`approve_floor=None`** (default) — Approve `max(amount, 100 * 10**decimals)`. Stablecoin-friendly: residual allowance stays bounded (≤100 tokens), but small budgets don't repeatedly re-approve. Saves gas across job streams.
+- **`approve_floor=None`** (default) — Approve `max(amount, 100 * 10**decimals)`. Residual allowance stays bounded (≤100 tokens), but small budgets don't repeatedly re-approve. Saves gas across job streams.
 - **`approve_floor=0`** — Approve exactly `amount` (most conservative).
 - **`approve_floor=X`** — Approve `max(amount, X)` (custom floor).
 
@@ -193,6 +192,6 @@ erc8183.vote_reject(job_id)    # whitelisted voter only; after dispute
 erc8183.claim_refund(job_id)   # anyone, after expiredAt, no settlement reached
 ```
 
-See [`examples/client/`](https://github.com/bnb-chain/bnbagent-sdk/tree/main/examples/client/) for the five canonical flows (happy, dispute-reject, stalemate-expire, never-submit, cancel-open).
+See [examples/client/](https://github.com/bnb-chain/bnbagent-sdk/tree/main/examples/client/) for the five canonical flows (happy, dispute-reject, stalemate-expire, never-submit, cancel-open).
 
 ---

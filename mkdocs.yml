@@ -291,6 +291,16 @@ nav:
           - Examples: ./developer-kit/bnbagent-sdk/examples.md
           - Security: ./developer-kit/bnbagent-sdk/security.md
           - Troubleshooting: ./developer-kit/bnbagent-sdk/troubleshooting.md
+      - BNBChain Studio:
+          - Overview: ./developer-kit/bnbchain-studio/index.md
+          - Quickstart: ./developer-kit/bnbchain-studio/quickstart.md
+          - Demo: ./developer-kit/bnbchain-studio/demo.md
+          - Architecture: ./developer-kit/bnbchain-studio/architecture.md
+          - Configuration: ./developer-kit/bnbchain-studio/configuration.md
+          - CLI Reference: ./developer-kit/bnbchain-studio/cli-reference.md
+          - Deployment: ./developer-kit/bnbchain-studio/deployment.md
+          - Security: ./developer-kit/bnbchain-studio/security.md
+          - Troubleshooting: ./developer-kit/bnbchain-studio/troubleshooting.md
       - Greenfield SDK:
           - Overview: ./developer-kit/greenfield-sdk/index.md
       - MCP & Ask AI:
@@ -301,10 +311,8 @@ nav:
           - Overview: ./developer-kit/mpp-sdk/index.md
           - Quickstart: ./developer-kit/mpp-sdk/quickstart.md
           - Architecture: ./developer-kit/mpp-sdk/architecture.md
-          - Spec Compliance: ./developer-kit/mpp-sdk/spec-compliance.md
           - Replay Store: ./developer-kit/mpp-sdk/replay-store.md
           - Examples: ./developer-kit/mpp-sdk/examples.md
-          - ADR permit2Spender: ./developer-kit/mpp-sdk/adr/0001-permit2-spender.md
   - BNB Chain Fusion:
       - BNB Chain Fusion: ./bc-fusion/index.md
       - Overview: ./bc-fusion/overview.md

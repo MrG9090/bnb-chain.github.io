@@ -5,17 +5,16 @@ title: MPP SDK Quickstart
 # Quickstart
 
 A runnable, end-to-end walkthrough of `@bnb-chain/mpp`: stand up a server
-that gates a route behind a stablecoin payment (`402 Payment Required`),
+that gates a route behind an on-chain payment (`402 Payment Required`),
 then build a client credential, submit it, and read the `Payment-Receipt`.
 
-This guide uses **BSC Testnet (chainId 97) + `TEST_USDT`** so you can run it
-end-to-end without mainnet funds — the same pair the bundled
-[`examples/`](https://github.com/bnb-chain/mpp-sdk/tree/main/examples) run on. Swap to any other curated `(chain, token)`
-pair (e.g. `ethereum` / `USDC`) by changing two strings; see
-[Curated pairs](#curated-chain--token-pairs).
+This guide uses **BSC Testnet (chainId 97)** with a curated preset from the
+upstream curated preset registry — the same defaults the bundled
+[examples](https://github.com/bnb-chain/mpp-sdk/tree/main/examples) run on. Swap to any other curated `(chain, token)` pair by changing two strings; see
+[Curated presets](#curated-presets).
 
-> Prefer reading code? [`examples/charge-server`](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-server)
-> + [`examples/charge-demo`](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-demo) are the full, running
+> Prefer reading code? [examples/charge-server](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-server)
+> + [examples/charge-demo](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-demo) are the full, running
 > version of everything below.
 
 ## Contents
@@ -25,23 +24,23 @@ pair (e.g. `ethereum` / `USDC`) by changing two strings; see
 - [1. Server — protect a route](#1-server--protect-a-route)
 - [2. Client — pay the 402](#2-client--pay-the-402)
 - [3. Read the receipt](#3-read-the-receipt)
-- [Curated chain / token pairs](#curated-chain--token-pairs)
+- [Curated presets](#curated-presets)
 - [Challenge binding modes](#challenge-binding-modes)
 - [Production checklist](#production-checklist)
 
 ## Install
 
 ```bash
-pnpm add @bnb-chain/mpp mppx viem
+pnpm add @bnb-chain/mpp viem
 ```
 
-Peers: `mppx ^0.6.28`, `viem ^2.51.0`. **Node ≥ 22.**
+Peer: `viem ^2.51.0`. **Node ≥ 22.**
 
 Three entry points:
 
 | Import | Use it for |
 | --- | --- |
-| `@bnb-chain/mpp/server` | The server factory (`chargeAsync` / `preflightCharge`), composed with `Mppx.create()`. |
+| `@bnb-chain/mpp/server` | The server factory (`chargeAsync` / `preflightCharge` / `charge`). |
 | `@bnb-chain/mpp/client` | The four credential constructors (`createHashCredential`, `createPermit2Credential`, …). |
 | `@bnb-chain/mpp` | Universal helpers — `chargeFromDecimal` (decimal → base units) and the `Payment-Receipt` codec. |
 
@@ -70,79 +69,51 @@ client                                    server (@bnb-chain/mpp/server)
 - **`permit2` / `authorization`** are server-settled — the server broadcasts
   `permitWitnessTransferFrom` / `transferWithAuthorization`, so it needs a
   funded **settlement signer** (`settlementAccount`).
-- A token only advertises `authorization` if it implements EIP-3009 (e.g.
-  Circle USDC). Plain BEP-20s like `TEST_USDT` advertise
-  `['permit2', 'transaction', 'hash']`.
+- A preset only advertises `authorization` if its curated entry has EIP-3009
+  support. Plain BEP-20 presets advertise `['permit2', 'transaction', 'hash']`.
 
 ## 1. Server — protect a route {#1-server--protect-a-route}
 
-`chargeAsync(params)` resolves the curated `(chain, token)` to a contract
-address + decimals, probes the Permit2 deployment, and returns a charge
-method. Hand it to `Mppx.create()`, then call
+`chargeAsync(params)` resolves the curated `(chain, token)` preset to decimals
+and deployment metadata, probes Permit2, and returns a charge method.
+Register it with your HTTP payment handler, then call
 `handler.evm.charge({ amount })(request)` per route: it returns a `402`
 challenge when there's no valid credential, or settles and gives you a
-`withReceipt()` wrapper when there is.
+`withReceipt()` wrapper when there is. See [Examples](examples.md) for a
+full runnable server.
 
 ```ts
-// server.ts — run with: node --import tsx --env-file=.env server.ts (Node ≥22)
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
-import { Mppx } from 'mppx/server'
 import { privateKeyToAccount } from 'viem/accounts'
+import type { Address, Hex } from 'viem'
 
-import { chargeFromDecimal } from '@bnb-chain/mpp'
 import { chargeAsync } from '@bnb-chain/mpp/server'
 
 // Settlement signer — broadcasts Permit2 settlement; must hold gas (tBNB on
-// BSC Testnet). Required because TEST_USDT advertises permit2.
+// BSC Testnet). Required when the preset advertises permit2.
 const settlementAccount = privateKeyToAccount(
-  process.env.SETTLEMENT_PRIVATE_KEY as `0x${string}`,
+  process.env.SETTLEMENT_PRIVATE_KEY as Hex,
 )
 
 const charge = await chargeAsync({
   chain: 'bsc-testnet',
-  token: 'TEST_USDT',
-  recipient: process.env.RECIPIENT_ADDRESS as `0x${string}`, // your merchant address
+  token: '<bsc-testnet-preset>',
+  recipient: process.env.RECIPIENT_ADDRESS as Address,
   settlementAccount,
   challengeBinding: { mode: 'mppx-managed' },
-  // Optional: override the curated default RPC.
   rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545',
   // store: createDurableReplayStore(...) // REQUIRED in production — see checklist
 })
 
-const handler = Mppx.create({
-  methods: [charge],
-  secretKey: process.env.MPP_SECRET_KEY!, // HMAC challenge-binding key
-  // No `transport` — chargeAsync auto-wires evmHttpTransport (receipt codec).
-})
-
-const app = new Hono()
-
-app.get('/article', async (c) => {
-  // 1 TEST_USDT (18 decimals) → base units. The amount is per-route; the
-  // (chain, token, recipient) come from chargeAsync above.
-  const { amount } = chargeFromDecimal({ amount: '1', decimals: 18 })
-
-  const result = await handler.evm.charge({ amount })(c.req.raw)
-  if (result.status === 402) return result.challenge // sends WWW-Authenticate
-
-  // Paid + verified + settled. withReceipt attaches the Payment-Receipt header.
-  return result.withReceipt(
-    c.json({ title: 'Premium Article', paidAt: new Date().toISOString() }),
-  )
-})
-
-serve({ fetch: app.fetch, port: 3000 }, (i) =>
-  console.log(`listening on http://localhost:${i.port}`),
-)
+// Register `charge` with your HTTP payment handler and mount paid routes.
+// Full Hono/Express wiring: see charge-server in Examples.
 ```
 
 `.env`:
 
 ```bash
-RECIPIENT_ADDRESS=0xYourMerchantAddress
+RECIPIENT_ADDRESS=<merchant-address>
 MPP_SECRET_KEY=...            # openssl rand -hex 32
-SETTLEMENT_PRIVATE_KEY=0x...  # 32-byte hex; fund with tBNB (https://testnet.bnbchain.org/faucet-smart)
+SETTLEMENT_PRIVATE_KEY=<hex-private-key>  # fund with tBNB (https://testnet.bnbchain.org/faucet-smart)
 ```
 
 Probe the challenge phase:
@@ -170,32 +141,32 @@ All signing inputs (`chainId`, `currency`, `recipient`, `amount`,
 `permit2Address`) must equal the challenge's — read them off
 `challenge.request`.
 
+Fetch the protected URL without credentials to receive a `402` and deserialize
+the `WWW-Authenticate` challenge. The [charge-demo](examples.md) example shows
+the full client wiring; the credential builders below take that parsed
+`challenge` object.
+
 ```ts
-// pay.ts — a Node payer (tsx). In a browser, see the wallet note below.
-import { Challenge } from 'mppx'
 import {
   http,
   createWalletClient,
   encodeFunctionData,
+  type Address,
+  type Hex,
 } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { bscTestnet } from 'viem/chains'
 
 import { createHashCredential, createPermit2Credential } from '@bnb-chain/mpp/client'
 
-const URL = 'http://localhost:3000/article'
-const payer = privateKeyToAccount(process.env.PAYER_PRIVATE_KEY as `0x${string}`)
+const payer = privateKeyToAccount(process.env.PAYER_PRIVATE_KEY as Hex)
 
-// ── Fetch the 402 challenge ──────────────────────────────────────────────
-const res = await fetch(URL)
-if (res.status !== 402) throw new Error(`expected 402, got ${res.status}`)
-const challenge = Challenge.deserialize(res.headers.get('WWW-Authenticate')!)
-
+// `challenge` — from the 402 WWW-Authenticate header (see charge-demo).
 const req = challenge.request as {
   amount: string
-  currency: `0x${string}`
-  recipient: `0x${string}`
-  methodDetails: { chainId: number; permit2Address: `0x${string}`; credentialTypes: string[] }
+  currency: Address
+  recipient: Address
+  methodDetails: { chainId: number; permit2Address: Address; credentialTypes: string[] }
 }
 const { amount, currency, recipient } = req
 const { chainId, permit2Address } = req.methodDetails
@@ -253,7 +224,7 @@ const credential = await createPermit2Credential({
 ### Submit the credential
 
 ```ts
-const paid = await fetch(URL, { headers: { Authorization: credential } })
+const paid = await fetch(protectedUrl, { headers: { Authorization: credential } })
 console.log(paid.status)                          // 200
 const receiptHeader = paid.headers.get('Payment-Receipt')!
 console.log(await paid.json())
@@ -262,12 +233,12 @@ console.log(await paid.json())
 > **Browser wallets (MetaMask, etc.):** pass an `account` whose
 > `signTypedData` delegates to the wallet (e.g. wagmi's
 > `walletClient.signTypedData`) instead of a `privateKeyToAccount`. See
-> [`examples/charge-demo/src/actions`](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-demo/src/actions)
+> [examples/charge-demo/src/actions](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-demo/src/actions)
 > for the adapter.
 
 ## 3. Read the receipt
 
-The `Payment-Receipt` header is a `draft §7.6` EVM receipt. Decode it with
+The `Payment-Receipt` header carries the settlement receipt. Decode it with
 the codec from the top-level barrel:
 
 ```ts
@@ -278,49 +249,42 @@ const receipt = deserializeEvmReceipt(receiptHeader)
 // `reference` is the on-chain settlement / transfer tx hash.
 ```
 
-## Curated chain / token pairs {#curated-chain--token-pairs}
+## Curated presets {#curated-presets}
 
-`chain` / `token` are restricted to the curated matrix (v1 — no arbitrary
-BYO ERC-20). A few pairs:
+`chain` / `token` are restricted to curated presets (v1 — no arbitrary BYO ERC-20). An unsupported pair throws `CuratedLookupError`.
 
-| `chain` | `token` | decimals | notes |
-| --- | --- | --- | --- |
-| `bsc-testnet` | `TEST_USDT` | 18 | testnet (this guide); permit2 / transaction / hash |
-| `ethereum` | `USDC` | 6 | EIP-3009 → also `authorization` |
-| `base` | `USDC` | 6 | EIP-3009 → also `authorization` |
-| `bsc` | `BINANCE_PEG_USDT` | 18 | permit2 / transaction / hash |
+The authoritative preset list is **not duplicated here**. See:
 
-An unsupported pair throws `CuratedLookupError`. The full matrix +
-verification notes live in `src/server/curated.ts`.
+- [MPP SDK overview — Curated presets](index.md#curated-presets)
+- [Examples](examples.md) for runnable BSC testnet defaults
 
 ## Challenge binding modes
 
 `challengeBinding` is required on `ServerParameters`:
 
-- `{ mode: 'mppx-managed' }` — the common path under `Mppx.create()`; mppx
-  runs `Challenge.verify` + `Expires.assert`. Pair with `secretKey` on
-  `Mppx.create()`.
+- `{ mode: 'mppx-managed' }` — integrated HTTP handler path;
+  `Challenge.verify` + `Expires.assert` run automatically. Pair with
+  `secretKey` on the handler.
 - `{ mode: 'mppx-hmac', secretKey }` — bare `Method.toServer(...).verify`
-  path for custom (non-`Mppx.create`) hosts.
-- `{ mode: 'stored-lookup', challengeStore }` — HMAC-free (draft §6); the
-  server persists each issued challenge (`rememberChallenge`) and compares
+  path for custom hosts.
+- `{ mode: 'stored-lookup', challengeStore }` — HMAC-free; the server
+  persists each issued challenge (`rememberChallenge`) and compares
   canonical bytes at verify.
 
 ## Production checklist
 
 - **Replay store** — pass a durable, atomic `store` (Redis / Postgres /
   Cloudflare KV). Under `NODE_ENV=production`, omitting it throws at startup.
-  `Store.memory()` is dev/test only. See [`replay-store.md`](replay-store.md).
+  `Store.memory()` is dev/test only. See [replay-store.md](replay-store.md).
 - **Settlement signer** — fund it and treat the key as a hot wallet (rotate,
   scope per-deployment). Only needed for permit2 / authorization.
 - **RPC** — pin your own provider via `rpcUrl`; public endpoints rate-limit.
 - **Hardening** — rate-limit, gas budget, and degrade-to-payer-funded
-  patterns are shown in [`examples/charge-server`](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-server)
+  patterns are shown in [examples/charge-server](https://github.com/bnb-chain/mpp-sdk/tree/main/examples/charge-server)
   (`src/hardening.ts`).
 
 ## See also
 
-- [`examples.md`](examples.md) — the runnable examples
-- [`architecture.md`](architecture.md) — how the pieces fit
-- [`spec-compliance.md`](spec-compliance.md) — `draft-evm-charge-00` mapping + the `permit2Spender` extension
-- [`replay-store.md`](replay-store.md) — durable replay-store backends
+- [examples.md](examples.md) — the runnable examples
+- [architecture.md](architecture.md) — how the pieces fit
+- [replay-store.md](replay-store.md) — durable replay-store backends

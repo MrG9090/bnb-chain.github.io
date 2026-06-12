@@ -61,4 +61,4 @@ Returns structured JSON for the requested block. Supply a `PRIVATE_KEY` to unloc
 * **Ask AI Tutorial** – connect your IDE to the read‑only doc search endpoint: [Ask AI](../ask-ai/index.md)
 * **AI Agent solution page** – see how MCP fits into BNB Chain’s broader AI strategy: [https://www.bnbchain.org/en/solutions/ai-agent](https://www.bnbchain.org/en/solutions/ai-agent)
 
-Have questions? Join **#ai‑tooling** on Discord or open a GitHub issue. PRs welcome!
+Have questions? Open a [GitHub issue](https://github.com/bnb-chain/bnbchain-mcp/issues). PRs welcome!

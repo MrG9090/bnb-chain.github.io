@@ -17,7 +17,7 @@ title: BNBAgent SDK Configuration
 | `ERC8183_ROUTER_ADDRESS` | No | Network default | `EvaluatorRouter` proxy override. |
 | `ERC8183_POLICY_ADDRESS` | No | Network default | Policy contract override (defaults to `OptimisticPolicy`). |
 | `ERC8183_AGENT_URL` | If LocalStorageProvider | — | Agent's public base URL including `/erc8183`. Required when storage returns `file://` URLs; the SDK rewrites them to `{ERC8183_AGENT_URL}/job/{id}/response`. |
-| `ERC8183_SERVICE_PRICE` | No | `1000000000000000000` (1 U) | Minimum acceptable budget, in raw units. |
+| `ERC8183_SERVICE_PRICE` | No | `1000000000000000000` (1 unit) | Minimum acceptable budget, in raw units. |
 | `ERC8183_FUNDED_POLL_INTERVAL` | No | `30` | Seconds between funded-job poll passes (agent-server). |
 | `ERC8183_NEGOTIATE_RATE_LIMIT` | No | `120` | Max `/negotiate` requests per window per client IP. |
 | `ERC8183_NEGOTIATE_RATE_WINDOW` | No | `60` | Sliding-window length for `/negotiate` rate limit, in seconds. |
@@ -28,9 +28,9 @@ title: BNBAgent SDK Configuration
 | `STORAGE_GATEWAY_URL` | No | Pinata default | Custom IPFS gateway. |
 | `STORAGE_LOCAL_PATH` | No | `.agent-data` | Directory for local storage. |
 
-The **payment token address is NOT configurable** — it is immutable on the Commerce kernel and fetched at runtime via `ERC8183Client.payment_token`.
+Commerce settlement assets are resolved at runtime from the deployed kernel — not configured via env vars in these docs. See [Networks & contracts](networks.md) for where deployments are maintained upstream.
 
-See [`.env.example`](https://github.com/bnb-chain/bnbagent-sdk/blob/main/.env.example) in the repository for the full surface with inline comments.
+See [.env.example](https://github.com/bnb-chain/bnbagent-sdk/blob/main/.env.example) in the repository for the full surface with inline comments.
 
 [← BNBAgent SDK overview](index.md)
 

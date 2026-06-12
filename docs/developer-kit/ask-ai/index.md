@@ -101,6 +101,4 @@ Explain the purpose of Greenfield buckets.
 | **Long latency (> 10 s)**  | Disable any *Throttle Streaming* or similar setting in your IDE. |
 | **No answer returned**     | Make sure you chose **bnbchain‑askai‑mcp** and asked a question. |
 
-Need more help? Ping us in **#ai‑tooling** on the BNB Chain Discord.
-
-Open an issue in the [docs repo](https://github.com/bnb-chain/docs-site/issues) if your favourite editor is missing.
+Need more help? Open an issue in the [docs repo](https://github.com/bnb-chain/bnb-chain.github.io/issues) if your favourite editor is missing.
