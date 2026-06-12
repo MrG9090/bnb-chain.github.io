@@ -9372,7 +9372,7 @@ To deposit funds into your frozen account and unfreeze it, you can follow these 
      ```
 #### Using the Greenfield Go SDK
 
-   * Refer to the [Go SDK Example](https://docs.bnbchain.org/bnb-greenfield/for-developers/apis-and-sdks/sdk-go) section to set up the environment locally.
+   * Refer to the [Go SDK Example](https://docs.bnbchain.org/developer-kit/greenfield-sdk) section to set up the environment locally.
    * Once set up, use [deposit](https://pkg.go.dev/github.com/bnb-chain/greenfield-go-sdk@v1.7.4/client#Client.Deposit) method to deposit to your account.
 
 ---
@@ -10215,8 +10215,8 @@ Create a private bucket and share it with specific individuals.
 
 ### SDK
 
-- [Greenfield Go SDK](apis-and-sdks/sdk-go.md), more details refer to [Go SDK Docs](https://pkg.go.dev/github.com/bnb-chain/greenfield-go-sdk).
-- [Greenfield Javascript SDK](apis-and-sdks/sdk-js.md), more details refer to [JS SDK Docs](https://docs.bnbchain.org/greenfield-js-sdk/).
+- [Greenfield Go SDK](../../developer-kit/greenfield-sdk/), more details refer to [Go SDK Docs](https://pkg.go.dev/github.com/bnb-chain/greenfield-go-sdk).
+- [Greenfield Javascript SDK](../../developer-kit/greenfield-sdk/), more details refer to [JS SDK Docs](https://docs.bnbchain.org/greenfield-js-sdk/).
 
 ## Setup
 
@@ -15633,7 +15633,7 @@ https://gnfd-mainnet-bundle.nodereal.io
 ---
 
 ## Overview
-> Source: https://docs.bnbchain.org/bnb-greenfield/for-developers/apis-and-sdks/
+> Source: https://docs.bnbchain.org/developer-kit/
 
 # APIs & SDKs
 Below are the lists of Official APIs and SDKs for BNB Greenfield in different languages. 
@@ -15649,7 +15649,7 @@ Below are the lists of Official APIs and SDKs for BNB Greenfield in different la
 ---
 
 ## Go SDK Example
-> Source: https://docs.bnbchain.org/bnb-greenfield/for-developers/apis-and-sdks/sdk-go/
+> Source: https://docs.bnbchain.org/developer-kit/greenfield-sdk/
 
 # Quickstart
 
@@ -16123,7 +16123,7 @@ permission APIs, etc. For more details, you can refer to [Greenfield Go SDK Docs
 ---
 
 ## Javascript SDK Example
-> Source: https://docs.bnbchain.org/bnb-greenfield/for-developers/apis-and-sdks/sdk-js/
+> Source: https://docs.bnbchain.org/developer-kit/greenfield-sdk/
 
 # Quickstart
 
@@ -17582,7 +17582,7 @@ There are two restrictions that apply when an SP requests to be in maintenance. 
 * The total maintenance duration for each SP, within the number of blocks defined by `num_of_historical_blocks_for_maintenance_records`, should not exceed the `maintenance_duration_quota`.
 * An SP is not allowed to make two consecutive requests to `STATUS_IN_MAINTENANCE` within `num_of_lockup_blocks_for_maintenance`, even if there are enough quotas for it.
 
-To ensure the quality of service provided, we strongly recommend that SPs conduct a self-test via the maintenance account before turning back to `STATUS_IN_SERVICE`. This includes creating buckets/objects to verify that all functionalities work as expected. For a detailed illustration on how to use SDK to create bucket/object, please refer to the [APIs and SDKs](../for-developers/apis-and-sdks/index.md).
+To ensure the quality of service provided, we strongly recommend that SPs conduct a self-test via the maintenance account before turning back to `STATUS_IN_SERVICE`. This includes creating buckets/objects to verify that all functionalities work as expected. For a detailed illustration on how to use SDK to create bucket/object, please refer to the [APIs and SDKs](../../developer-kit/).
 
 ## Exit
 
@@ -20443,7 +20443,7 @@ the key features and their development status on Greenfield. Please stay tuned.
 ---
 
 ## Overview
-> Source: https://docs.bnbchain.org/showcase/mcp/
+> Source: https://docs.bnbchain.org/developer-kit/mcp/
 
 # Model Context Protocol (MCP)
 
@@ -20465,7 +20465,7 @@ The **Model Context Protocol** is an open interface that lets AI agents and deve
 | Name                                                          | Endpoint / Install                                      | Scope                                                             | Typical usage                                                       |
 | ------------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | [**bnbchain‑mcp**](https://github.com/bnb-chain/bnbchain-mcp) | `npx @bnb-chain/mcp@latest`or self-host via Docker | Full toolkit: blocks, txs, wallets, Greenfield ops & more         | Build, test, or automate on-chain actions from your IDE or scripts. |
-| [**ask‑ai‑mcp**](./docs/showcase/mcp/ask-ai-to-ide.md)                        | `https://api.superintern.ai/agent/async/mcp/mcp`                | Read-only semantic search over BNB Chain docs, BEPs, blogs & FAQs | Quick answers in chat panes or command palettes.                    |
+| [**ask‑ai‑mcp**](./developer-kit/ask-ai.md)                        | `https://api.superintern.ai/agent/async/mcp/mcp`                | Read-only semantic search over BNB Chain docs, BEPs, blogs & FAQs | Quick answers in chat panes or command palettes.                    |
 
 Both servers speak the *same* MCP schema, so you can swap them in your settings with a single JSON change.
 
@@ -20509,7 +20509,7 @@ Have questions? Join **#ai‑tooling** on Discord or open a GitHub issue. PRs we
 ---
 
 ## Skills
-> Source: https://docs.bnbchain.org/showcase/mcp/skills/
+> Source: https://docs.bnbchain.org/developer-kit/mcp/skills/
 
 # BNB Chain Skills
 
@@ -20522,7 +20522,7 @@ This page is for **AI agents** that integrate with BNB Chain. It covers how to c
 ## 1. Connect to BNB Chain MCP
 
 - **Run the MCP server:** `npx @bnb-chain/mcp@latest`
-- **Fetch this skill page (optional):** `curl -s https://raw.githubusercontent.com/bnb-chain/bnb-chain.github.io/main/docs/showcase/mcp/skills.md`
+- **Fetch this skill page (optional):** `curl -s https://raw.githubusercontent.com/bnb-chain/bnb-chain.github.io/main/developer-kit/mcp/skills.md`
 
 ---
 
@@ -20556,7 +20556,7 @@ npx skills add bnb-chain/bnbchain-skills -g
 ---
 
 ## Integrating AskAI
-> Source: https://docs.bnbchain.org/showcase/mcp/ask-ai-to-ide/
+> Source: https://docs.bnbchain.org/developer-kit/ask-ai/
 
 # Quick‑Start Tutorial
 
@@ -20662,7 +20662,7 @@ Open an issue in the [docs repo](https://github.com/bnb-chain/docs-site/issues) 
 ---
 
 ## Decentralized Identity
-> Source: https://docs.bnbchain.org/showcase/identity/did/
+> Source: https://docs.bnbchain.org/build-guides/identity/did/
 
 # Decentralized Identity
 
@@ -20703,7 +20703,7 @@ A crucial aspect of securing decentralized identities is cryptography. In crypto
 ---
 
 ## SpaceID
-> Source: https://docs.bnbchain.org/showcase/identity/dns/
+> Source: https://docs.bnbchain.org/build-guides/identity/dns/
 
 # Decentralized Naming Service
 
@@ -20750,7 +20750,7 @@ This vision is being realized by adding an all-in-one API over the SDK, allowing
 ---
 
 ## Build with SpaceID
-> Source: https://docs.bnbchain.org/showcase/identity/dns-dev/
+> Source: https://docs.bnbchain.org/build-guides/identity/dns-dev/
 
 # Get Started - SpaceID
 
@@ -20856,7 +20856,7 @@ Replace 'your_api_key' with your actual API key and 'example.eth' with the name 
 ---
 
 ## BNB Attestation Service
-> Source: https://docs.bnbchain.org/showcase/identity/attestation/
+> Source: https://docs.bnbchain.org/build-guides/identity/attestation/
 
 # BNB Attestation Service
 
@@ -20902,7 +20902,7 @@ Combined BAS with zero-knowledge proofs, [zkPass](https://bas.zkpass.org/) uses 
 ---
 
 ## Build your Attestation
-> Source: https://docs.bnbchain.org/showcase/identity/attestation-dev/
+> Source: https://docs.bnbchain.org/build-guides/identity/attestation-dev/
 
 # Get Started - Attestation
 
@@ -21061,7 +21061,7 @@ And many more!
 ---
 
 ## Telegram Mini Game on BNB Chain
-> Source: https://docs.bnbchain.org/showcase/telegram/minigame/
+> Source: https://docs.bnbchain.org/build-guides/telegram/mini-apps/
 
 # Creating Telegram BNB Mini Apps: A How-to Guide for Developers 
 
@@ -21197,7 +21197,7 @@ Telegram mini apps and mini games provide developers with exciting new ways to e
 ---
 
 ## Telegram Wallets
-> Source: https://docs.bnbchain.org/showcase/telegram/wallets/
+> Source: https://docs.bnbchain.org/build-guides/telegram/wallets/
 
 ## **BNB Chain on Telegram: Your Gateway to Web3 Convenience**
 
@@ -21233,7 +21233,7 @@ The convergence of BNB Chain and Telegram opens up a world of possibilities.  Wh
 ---
 
 ## In-app Wallet and Account Abstraction
-> Source: https://docs.bnbchain.org/showcase/wallet/in-app-wallet/
+> Source: https://docs.bnbchain.org/build-guides/wallet/in-app-wallet/
 
 references: https://thirdweb.com/account-abstraction
 
@@ -21289,7 +21289,7 @@ https://portal.thirdweb.com/connect/account-abstraction/guides/react
 ---
 
 ## Introduction
-> Source: https://docs.bnbchain.org/showcase/tokenization/introduction/
+> Source: https://docs.bnbchain.org/build-guides/tokenization/introduction/
 
 ---
 title: BNB Chain Tokenization Tutorial
@@ -21329,7 +21329,7 @@ The [NFT Loyalty Programs Tokenization Tutorial](./nft-loyalty-programs.md) will
 ---
 
 ## Account Preparation
-> Source: https://docs.bnbchain.org/showcase/tokenization/account-preparation/
+> Source: https://docs.bnbchain.org/build-guides/tokenization/account-preparation/
 
 Welcome to the BNB Chain Tokenization Tutorial.
 
@@ -21571,7 +21571,7 @@ Depending on MoonPay’s requirements, you may need to complete identity verific
 ---
 
 ## Company Tokenization Tutorial
-> Source: https://docs.bnbchain.org/showcase/tokenization/company-tokenization/
+> Source: https://docs.bnbchain.org/build-guides/tokenization/company-tokenization/
 
 Welcome to the BNB Chain Tokenization Tutorial.
 
@@ -22182,7 +22182,7 @@ You need to guide your community members to claim airdrop so that they can get t
 ---
 
 ## RWA Tokenization Tutorial
-> Source: https://docs.bnbchain.org/showcase/tokenization/rwa-tokenization/
+> Source: https://docs.bnbchain.org/build-guides/tokenization/rwa-tokenization/
 
 Welcome to the BNB Chain Real World Asset Tokenization Tutorial.
 
@@ -22406,7 +22406,7 @@ Your whitelist has been successfully set up.
 ---
 
 ## NFT Loyalty Program Tutorial
-> Source: https://docs.bnbchain.org/showcase/tokenization/nft-loyalty-programs/
+> Source: https://docs.bnbchain.org/build-guides/tokenization/nft-loyalty-programs/
 
 NFT Loyalty Programs based on NFTs can replace traditional paper-based systems and physical membership cards by enhancing user experience and user loyalty.
 
