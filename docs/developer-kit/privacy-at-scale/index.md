@@ -34,17 +34,7 @@ Undercollateralized lending has been the “holy grail” of DeFi, but it requir
 
 **Application:** This allows users to access better interest rates or higher leverage based on their real-world financial standing without doxxing their identity to the lending protocol.
 
-### 3. BAP-674: standardizing the private ledger
-
-Fragmented privacy solutions are a barrier to institutional adoption. [Polyhedra](https://polyhedra.network/)’s BAP-674 protocol acts as the “TCP/IP” for private transactions on BNB Chain, creating a unified language for how tokens move anonymously.
-
-**Unified API:** It provides a standardized interface for developers to integrate anonymous transfers into their dApps.
-
-**Interoperability:** It ensures that a “private” token on one side of the ecosystem remains private and verifiable when moved to another compliant platform.
-
-**Compliance integration:** By defining a standard, BAP-674 makes it easier for third-party compliance software to plug into the ecosystem without compromising the underlying ZK-circuit integrity.
-
-### 4. Zama and FHE: the “blind computation” frontier
+### 3. Zama and FHE: the “blind computation” frontier
 
 While ZK-proofs are excellent for proving a statement is true, Fully Homomorphic Encryption (FHE) allows for actual computation on encrypted data. BNB Chain’s collaboration with [Zama](https://www.zama.org/) marks the transition into the era of **blind computation**.
 
@@ -58,7 +48,6 @@ While ZK-proofs are excellent for proving a statement is true, Fully Homomorphic
 |----------|-------------|---------------|--------------|--------|
 | **Intelligent Privacy Pool** (Brevis / 0xbow) | Institutions requiring compliant confidentiality | Institutional private transfers, fair prediction markets, compliant fund mixing | 1. Deposit assets → 2. Prove eligibility via on-chain provenance → 3. Withdraw to unlinked address if in “Association Set” | **Launched** (early 2026) |
 | **ZKredit** (Brevis / Primus) | DeFi lenders and credit-gated protocols | Undercollateralized DeFi lending, credit-based RWA access, reputation-gated dApps | 1. Generate local ZK proof of account history / balance → 2. Record on-chain attestation → 3. dApp queries registry | **In development** — ListaDAO loan product planned as first proof of concept; launch date TBD |
-| **BAP-674** (Polyhedra) | Developers and institutional payment rails | Standardized institutional payments, multi-asset privacy transfers, audit-ready anonymous assets | 1. Initiate standard transfer → 2. zkSNARK verification of state transition → 3. Recipient receives assets with hidden amounts and addresses | **In development** |
 | **FHE layer** (Zama) | Banks, asset managers, RWA issuers | Bank-grade RWA tokenization (stocks, bonds), dark pools, encrypted governance, private payroll | 1. Wrap existing tokens 1:1 into confidential versions → 2. Perform computations on encrypted data → 3. Network verifies validity via blind computation | **In development** — timeline TBD |
 
 ## Strategic roadmap: toward a native privacy layer
@@ -79,7 +68,7 @@ BNB Chain’s long-term goal is to move beyond middleware and integrate privacy 
 
 ## Conclusion
 
-BNB Chain offers a multi-layered privacy stack suitable for the world's largest financial institutions. From standardizing transfers with BAP-674 to building a native, high-performance privacy layer for the next-generation trading chain, BNB Chain is establishing privacy as a core infrastructure primitive. For institutions, this stack provides a path to unlocking traditional financial value on a high-throughput, compliant public ledger.
+BNB Chain offers a multi-layered privacy stack suitable for the world's largest financial institutions. From compliant privacy pools and credit attestations to a native, high-performance privacy layer on the next-generation trading chain, BNB Chain is establishing privacy as a core infrastructure primitive. For institutions, this stack provides a path to unlocking traditional financial value on a high-throughput, compliant public ledger.
 
 ## References
 
