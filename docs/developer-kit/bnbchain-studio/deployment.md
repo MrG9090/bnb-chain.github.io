@@ -1,5 +1,5 @@
 ---
-title: BNBChain Studio Deployment
+title: BNB Agent Studio Deployment
 ---
 
 # Deployment
@@ -124,4 +124,4 @@ bag erc8004 show
 | Service `:8003` | EC2 `/apex/*` |
 | `STORAGE_LOCAL_PATH` | S3 / IPFS |
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)

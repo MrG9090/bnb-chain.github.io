@@ -1,5 +1,5 @@
 ---
-title: BNBAgent SDK Configuration
+title: BNB Agent SDK Configuration
 ---
 
 ## Configuration Reference
@@ -32,6 +32,6 @@ Commerce settlement assets are resolved at runtime from the deployed kernel — 
 
 See [.env.example](https://github.com/bnb-chain/bnbagent-sdk/blob/main/.env.example) in the repository for the full surface with inline comments.
 
-[← BNBAgent SDK overview](index.md)
+[← BNB Agent SDK overview](index.md)
 
 ---

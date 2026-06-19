@@ -1,16 +1,16 @@
 ---
-title: BNBAgent SDK Architecture
+title: BNB Agent SDK Architecture
 ---
 
 # Architecture
 
-This document describes the high-level architecture of the BNBAgent SDK.
+This document describes the high-level architecture of the BNB Agent SDK.
 If you want to familiarize yourself with the codebase, this is a good place
 to start.
 
 ## Bird's Eye View
 
-BNBAgent SDK is a Python toolkit for building **on-chain AI agents** on
+BNB Agent SDK is a Python toolkit for building **on-chain AI agents** on
 BNB Chain. It provides wallet management, a plugin module system, off-chain
 storage abstraction, and built-in support for the following protocols:
 

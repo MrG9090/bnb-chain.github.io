@@ -1,5 +1,5 @@
 ---
-title: BNBChain Studio Troubleshooting
+title: BNB Agent Studio Troubleshooting
 ---
 
 # Troubleshooting
@@ -115,7 +115,7 @@ Readiness check `C4` warns if the keystore is still inside `app/agent/`. Move it
 
 ## Related
 
-- [BNBAgent SDK troubleshooting](../bnbagent-sdk/troubleshooting.md) — protocol-level errors
+- [BNB Agent SDK troubleshooting](../bnbagent-sdk/troubleshooting.md) — protocol-level errors
 - [Security](security.md) — signing policy and keystore posture
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)

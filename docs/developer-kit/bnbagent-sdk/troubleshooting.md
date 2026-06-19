@@ -1,5 +1,5 @@
 ---
-title: BNBAgent SDK Troubleshooting
+title: BNB Agent SDK Troubleshooting
 ---
 
 ## Troubleshooting

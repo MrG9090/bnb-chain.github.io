@@ -212,7 +212,7 @@
 
 - [Overview](https://docs.bnbchain.org/developer-kit/): Lightweight index of official BNB Chain developer tools.
 - [Greenfield SDK](https://docs.bnbchain.org/developer-kit/greenfield-sdk/): Go and JavaScript client libraries for Greenfield (language tabs).
-- [BNBAgent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/): Python SDK for on-chain AI agents (ERC-8004, ERC-8183) on BSC.
+- [BNB Agent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/): Python SDK for on-chain AI agents (ERC-8004, ERC-8183) on BSC.
   - [Quickstart](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/quickstart/): Register agents, run server, use client.
   - [Architecture](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/architecture/): Module system and data flows.
   - [Configuration](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/configuration/): Environment variables.
@@ -220,7 +220,7 @@
   - [Examples](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/examples/): Client, voter, and agent-server flows.
   - [Security](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/security/): Wallet handling and signing policy.
   - [Troubleshooting](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/troubleshooting/): Common errors and fixes.
-- [BNBChain Studio](https://docs.bnbchain.org/developer-kit/bnbchain-studio/): Scaffold and deploy two-layer blockchain seller agents (CLI `bag`, ERC-8004/8183, x402) on BSC.
+- [BNB Agent Studio](https://docs.bnbchain.org/developer-kit/bnbchain-studio/): Scaffold and deploy two-layer blockchain seller agents (CLI `bag`, ERC-8004/8183, x402) on BSC.
   - [Quickstart](https://docs.bnbchain.org/developer-kit/bnbchain-studio/quickstart/): Install, scaffold, run locally, deploy.
   - [Demo](https://docs.bnbchain.org/developer-kit/bnbchain-studio/demo/): End-to-end weather-forecast seller walkthrough.
   - [Architecture](https://docs.bnbchain.org/developer-kit/bnbchain-studio/architecture/): Six-layer stack and two-layer deploy model.

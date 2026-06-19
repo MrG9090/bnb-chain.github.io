@@ -1,10 +1,10 @@
 ---
-title: BNBChain Studio Demo
+title: BNB Agent Studio Demo
 ---
 
 # Demo — weather-forecast seller (end to end)
 
-This walkthrough follows the full BNBChain Studio path for a single example: a **weather-forecast seller** on BSC testnet. You install the CLI, scaffold the agent with your AI IDE, set up a wallet, fund it, activate an LLM, run locally, negotiate a sale, register on-chain, and deploy.
+This walkthrough follows the full BNB Agent Studio path for a single example: a **weather-forecast seller** on BSC testnet. You install the CLI, scaffold the agent with your AI IDE, set up a wallet, fund it, activate an LLM, run locally, negotiate a sale, register on-chain, and deploy.
 
 Commands and behavior match the [bnbagent-studio](https://github.com/bnb-chain/bnbagent-studio) repository — see the [weather seller example](https://github.com/bnb-chain/bnbagent-studio#-example-a-weather-forecast-seller-end-to-end) in the README for the canonical reference.
 
@@ -607,4 +607,4 @@ All commands and skills referenced here live in [github.com/bnb-chain/bnbagent-s
 - [User guide](https://github.com/bnb-chain/bnbagent-studio/blob/main/docs/guides/user-guide.md)
 - [Capabilities reference](https://github.com/bnb-chain/bnbagent-studio/blob/main/docs/reference.md)
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)
