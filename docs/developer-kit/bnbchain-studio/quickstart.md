@@ -1,5 +1,5 @@
 ---
-title: BNBChain Studio Quickstart
+title: BNB Agent Studio Quickstart
 ---
 
 # Quickstart
@@ -146,6 +146,6 @@ The skills run the right `bag` commands and edit your files. The commands above 
 - [Demo](demo.md) — full end-to-end weather-forecast seller walkthrough
 - [Architecture](architecture.md) — how the six layers fit together
 - [Configuration](configuration.md) — `studio.toml` sections and env vars
-- [BNBAgent SDK quickstart](../bnbagent-sdk/quickstart.md) — protocol-level integration
+- [BNB Agent SDK quickstart](../bnbagent-sdk/quickstart.md) — protocol-level integration
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)

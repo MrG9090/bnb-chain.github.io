@@ -1,10 +1,10 @@
 ---
-title: BNBChain Studio Architecture
+title: BNB Agent Studio Architecture
 ---
 
 # Architecture
 
-BNBChain Studio wraps the [BNBAgent SDK](../bnbagent-sdk/index.md) with scaffolding, safety controls, and IDE integration. A v1 seller project is **two deployable artifacts** on top of a **six-layer stack**.
+BNB Agent Studio wraps the [BNB Agent SDK](../bnbagent-sdk/index.md) with scaffolding, safety controls, and IDE integration. A v1 seller project is **two deployable artifacts** on top of a **six-layer stack**.
 
 ## Six-layer stack
 
@@ -155,8 +155,8 @@ Buyer                    Layer B (Service)              Layer A (Agent)         
 
 ## Further reading
 
-- [BNBAgent SDK architecture](../bnbagent-sdk/architecture.md) — protocol module system
+- [BNB Agent SDK architecture](../bnbagent-sdk/architecture.md) — protocol module system
 - [GitHub — architecture.md](https://github.com/bnb-chain/bnbagent-studio/blob/main/docs/design/architecture.md) — full design document
 - [GitHub — decisions.md](https://github.com/bnb-chain/bnbagent-studio/blob/main/docs/design/decisions.md) — decision records
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)

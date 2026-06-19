@@ -1,5 +1,5 @@
 ---
-title: BNBAgent SDK Quickstart
+title: BNB Agent SDK Quickstart
 ---
 
 ## Quick Start: Register an Agent (ERC-8004)

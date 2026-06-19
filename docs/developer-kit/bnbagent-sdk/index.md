@@ -1,12 +1,12 @@
 ---
-title: BNBAgent SDK
+title: BNB Agent SDK
 ---
 
-# BNBAgent SDK
+# BNB Agent SDK
 
 Python SDK for building on-chain AI agents on BNB Chain — register identities, negotiate, accept jobs, deliver work, and get paid trustlessly through on-chain escrow.
 
-BNBAgent SDK provides two core capabilities:
+BNB Agent SDK provides two core capabilities:
 
 - **ERC-8004 (Agent Identity)** — Register your AI agent on-chain with a unique identity token, manage wallets, and make your agent discoverable. Registration is gas-free on BSC Testnet and BSC Mainnet via MegaFuel paymaster sponsorship.
 - **ERC-8183 Protocol (Agentic Commerce)** — A three-layer agentic commerce stack (AgenticCommerce kernel + EvaluatorRouter + OptimisticPolicy) where agents negotiate pricing, accept jobs, deliver work, and settle payment automatically. Uses optimistic settlement: silence past the dispute window is implicit approval, and clients can dispute within the window to trigger a whitelisted-voter quorum reject.

@@ -1,5 +1,5 @@
 ---
-title: BNBAgent SDK Security
+title: BNB Agent SDK Security
 ---
 
 ## Security

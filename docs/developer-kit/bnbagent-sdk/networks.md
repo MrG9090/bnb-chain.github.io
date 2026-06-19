@@ -1,5 +1,5 @@
 ---
-title: BNBAgent SDK Networks & Contracts
+title: BNB Agent SDK Networks & Contracts
 ---
 
 ## Network & Contracts
@@ -24,4 +24,4 @@ The SDK resolves commerce-related addresses at runtime from its network presets 
 
 **ERC-8004 registration**: Gas-sponsored on BSC Testnet and BSC Mainnet via [MegaFuel paymaster](https://docs.nodereal.io/docs/megafuel-overview).
 
-[← BNBAgent SDK overview](index.md)
+[← BNB Agent SDK overview](index.md)

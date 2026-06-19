@@ -1,10 +1,10 @@
 ---
-title: BNBChain Studio Configuration
+title: BNB Agent Studio Configuration
 ---
 
 # Configuration
 
-BNBChain Studio projects use two config files per layer plus environment variables. The workspace root holds the keystore but **no** `studio.toml` or `.env.local`.
+BNB Agent Studio projects use two config files per layer plus environment variables. The workspace root holds the keystore but **no** `studio.toml` or `.env.local`.
 
 ## Two `studio.toml` files
 
@@ -110,4 +110,4 @@ bag env set WALLET_PASSWORD <password> --project-root app/agent
 bag env get WALLET_PASSWORD --project-root app/agent
 ```
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)

@@ -1,5 +1,5 @@
 ---
-title: BNBChain Studio CLI Reference
+title: BNB Agent Studio CLI Reference
 ---
 
 # CLI Reference
@@ -112,4 +112,4 @@ from .managed_model import X     # wrong — bag doctor warns
 
 Full capability reference: [GitHub — reference.md](https://github.com/bnb-chain/bnbagent-studio/blob/main/docs/reference.md)
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)

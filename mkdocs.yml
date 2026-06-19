@@ -282,7 +282,7 @@ nav:
           - Feature Lists: ./bnb-greenfield/roadmap/features.md
   - Developer Kit:
       - Overview: ./developer-kit/index.md
-      - BNBAgent SDK:
+      - BNB Agent SDK:
           - Overview: ./developer-kit/bnbagent-sdk/index.md
           - Quickstart: ./developer-kit/bnbagent-sdk/quickstart.md
           - Configuration: ./developer-kit/bnbagent-sdk/configuration.md
@@ -291,7 +291,7 @@ nav:
           - Examples: ./developer-kit/bnbagent-sdk/examples.md
           - Security: ./developer-kit/bnbagent-sdk/security.md
           - Troubleshooting: ./developer-kit/bnbagent-sdk/troubleshooting.md
-      - BNBChain Studio:
+      - BNB Agent Studio:
           - Overview: ./developer-kit/bnbchain-studio/index.md
           - Quickstart: ./developer-kit/bnbchain-studio/quickstart.md
           - Demo: ./developer-kit/bnbchain-studio/demo.md
@@ -313,6 +313,8 @@ nav:
           - Architecture: ./developer-kit/mpp-sdk/architecture.md
           - Replay Store: ./developer-kit/mpp-sdk/replay-store.md
           - Examples: ./developer-kit/mpp-sdk/examples.md
+      - Privacy at Scale:
+          - Overview: ./developer-kit/privacy-at-scale/index.md
   - BNB Chain Fusion:
       - BNB Chain Fusion: ./bc-fusion/index.md
       - Overview: ./bc-fusion/overview.md

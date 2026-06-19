@@ -1,12 +1,12 @@
 ---
-title: BNBChain Studio
+title: BNB Agent Studio
 ---
 
-# BNBChain Studio
+# BNB Agent Studio
 
-Scaffold, run, and deploy a **two-layer blockchain seller** on BNB Chain. BNBChain Studio (`bnbagent-studio`) lets you describe what you want in Claude Code or Cursor; the studio emits a working agent project that **you own**, then helps you develop, debug, and deploy it.
+Scaffold, run, and deploy a **two-layer blockchain seller** on BNB Chain. BNB Agent Studio (`bnbagent-studio`) lets you describe what you want in Claude Code or Cursor; the studio emits a working agent project that **you own**, then helps you develop, debug, and deploy it.
 
-A seller agent earns on-chain by offering services over **ERC-8004** (identity) + **ERC-8183** (commerce) + **x402** (payments), built on the [BNBAgent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/).
+A seller agent earns on-chain by offering services over **ERC-8004** (identity) + **ERC-8183** (commerce) + **x402** (payments), built on the [BNB Agent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/).
 
 > **v0.0.1 is seller-only.** The CLI (`bag`), runtime library (`bnbagent_studio_core`), read-only MCP server, and IDE skills ship today. Buyer product flows and a hosted console are deferred to v2.
 
@@ -50,16 +50,16 @@ AWS Bedrock AgentCore is invoke-only (no public HTTP routes, no background poll 
 - **Layer A — the Agent** (`app/agent/` → AWS Bedrock AgentCore): the LLM, memory, tools, and **sole key-holder/signer**. Invoked on action envelopes (`quote` / `fulfill` / `settle`). All signing is fixed entrypoint code — never an LLM-callable tool.
 - **Layer B — the ERC-8183 Service** (`app/service/` → EC2/Fargate): a public, long-running, **keyless** container — `/negotiate` ingress, funded-job poller, and `InvokeAgentRuntime` client. Holds no key, runs no LLM, never signs.
 
-## Relationship to BNBAgent SDK
+## Relationship to BNB Agent SDK
 
 | Layer | Package | Role |
 |-------|---------|------|
-| Protocol | [bnbagent](https://pypi.org/project/bnbagent/) (BNBAgent SDK) | ERC-8004, ERC-8183, wallet ABC — pure protocol clients |
+| Protocol | [bnbagent](https://pypi.org/project/bnbagent/) (BNB Agent SDK) | ERC-8004, ERC-8183, wallet ABC — pure protocol clients |
 | Studio core | `bnbagent_studio_core` | Config, workflows, signing policy, audit log |
 | Studio surface | `bag` CLI + MCP + skills + recipes | Scaffolding, ops, IDE integration |
 | Your code | `app/agent/*`, `app/service/*` | Emitted by recipes; you own and edit freely |
 
-Use BNBAgent SDK directly when you want full control over protocol integration. Use BNBChain Studio when you want scaffolding, IDE skills, a two-layer deploy path, and safety defaults out of the box.
+Use BNB Agent SDK directly when you want full control over protocol integration. Use BNB Agent Studio when you want scaffolding, IDE skills, a two-layer deploy path, and safety defaults out of the box.
 
 ## Prerequisites
 

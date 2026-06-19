@@ -1,10 +1,10 @@
 ---
-title: BNBChain Studio Security
+title: BNB Agent Studio Security
 ---
 
 # Security
 
-BNBChain Studio is designed around five commitments. The security model follows from architectural boundaries, not optional settings.
+BNB Agent Studio is designed around five commitments. The security model follows from architectural boundaries, not optional settings.
 
 ## Core commitments
 
@@ -94,4 +94,4 @@ Deploying provisions resources in **your** AWS account. Published IAM reference 
 - Keep the Service zip free of Agent secrets — `bag deploy package` enforces this
 - Review `[wallet.signing]` before extending beyond default EIP-3009 allowlist
 
-[← BNBChain Studio overview](index.md)
+[← BNB Agent Studio overview](index.md)
